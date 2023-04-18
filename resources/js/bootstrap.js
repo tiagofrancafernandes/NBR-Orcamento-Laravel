@@ -5,7 +5,14 @@
  */
 
 import axios from 'axios';
+import loadash from 'lodash';
+import 'bootstrap';
+
+import * as Popper from '@popperjs/core';
+window.Popper = Popper;
+
 window.axios = axios;
+window._ = loadash;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 

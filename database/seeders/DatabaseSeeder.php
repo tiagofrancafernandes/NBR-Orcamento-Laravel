@@ -18,5 +18,17 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        $devSeeders = [
+            AdminUserSeeder::class,
+        ];
+
+        if (app()->environment([
+            'dev', 'local'
+        ])) {
+            foreach ($devSeeders as $seederClass) {
+                $this->call($seederClass);
+            }
+        }
     }
 }

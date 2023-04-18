@@ -13,4 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', fn () => view('welcome'));
+Route::get('/', fn () => redirect()->route('admin.index'));
+Route::get('/home', fn () => redirect()->route('admin.index'));
+
+Auth::routes();
+
+Route::name('admin.')->prefix('admin')->middleware(['auth'])->group(function () {
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+});
