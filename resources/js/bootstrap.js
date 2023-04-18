@@ -6,6 +6,7 @@
 
 import axios from 'axios';
 import loadash from 'lodash';
+import $ from "jquery";
 import 'bootstrap';
 
 import * as Popper from '@popperjs/core';
@@ -13,6 +14,8 @@ window.Popper = Popper;
 
 window.axios = axios;
 window._ = loadash;
+window.$ = $;
+window.jQuery = $;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 

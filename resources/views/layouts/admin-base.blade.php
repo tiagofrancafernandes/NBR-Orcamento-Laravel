@@ -2,6 +2,156 @@
 <html dir="ltr" data-lt-installed="true" lang="en" class="adjust-brightness">
 
     <head>
+        <title>Dashboard - {{ config('app.name', 'Laravel') }}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="author" content="{{ config('app.name', 'Laravel') }}">
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        <link rel="dns-prefetch" href="//google.com">
+        <link rel="dns-prefetch" href="//apis.google.com">
+        <link rel="dns-prefetch" href="//ajax.googleapis.com">
+        <link rel="dns-prefetch" href="//www.google-analytics.com">
+        <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+        <link rel="dns-prefetch" href="//gstatic.com">
+        <link rel="dns-prefetch" href="//oss.maxcdn.com">
+        <link rel="dns-prefetch" href="//fonts.gstatic.com">
+
+        <!-- Scripts -->
+        @vite([
+            'public/dashboard-assets/styles.css',
+            'resources/js/app.js',
+        ])
+
+        <meta property="fb:app_id" content="">
+        <meta property="og:site_name" content="{{ config('app.name', 'Laravel') }}">
+        <meta property="og:locale" content="en_US">
+        <meta property="og:url" content="{{ url('/') }}/dashboard">
+        <meta property="og:title" content="Dashboard - {{ config('app.name', 'Laravel') }}">
+        <meta property="og:description" content="">
+        <meta property="og:type" content="website">
+        <meta property="og:image" content="{{ url('/') }}/dashboard-assets/img/storage/logo/2024283059.png">
+        <meta property="twitter:card" content="summary">
+        <meta property="twitter:title" content="Dashboard - {{ config('app.name', 'Laravel') }}">
+        <meta property="twitter:description" content="">
+        <meta property="twitter:domain" content="{{ url('/') }}">
+        <meta name="twitter:image:src" content="{{ url('/') }}/dashboard-assets/img/storage/logo/2024283059.png">
+        <link rel="shortcut icon" href="{{ url('/') }}/dashboard-assets/img/storage/logo/400028613.png">
+        <script async="">
+            var themecolor = '#10a37f';
+            var mapcolor = '#8080ff';
+            var siteurl = "{{ url('/') }}";
+            var template_name = 'classic-theme';
+            window.site_base_url = window.site_base_url || "{{ url('/') }}";
+        </script>
+        <!--Loop for Theme Color codes-->
+        <style>
+            :root {
+                --theme-color-0_01: rgba(16, 163, 127, 0.01);
+                --theme-color-0_02: rgba(16, 163, 127, 0.02);
+                --theme-color-0_03: rgba(16, 163, 127, 0.03);
+                --theme-color-0_04: rgba(16, 163, 127, 0.04);
+                --theme-color-0_05: rgba(16, 163, 127, 0.05);
+                --theme-color-0_06: rgba(16, 163, 127, 0.06);
+                --theme-color-0_07: rgba(16, 163, 127, 0.07);
+                --theme-color-0_08: rgba(16, 163, 127, 0.08);
+                --theme-color-0_09: rgba(16, 163, 127, 0.09);
+                --theme-color-0_1: rgba(16, 163, 127, 0.1);
+                --theme-color-0_11: rgba(16, 163, 127, 0.11);
+                --theme-color-0_12: rgba(16, 163, 127, 0.12);
+                --theme-color-0_13: rgba(16, 163, 127, 0.13);
+                --theme-color-0_14: rgba(16, 163, 127, 0.14);
+                --theme-color-0_15: rgba(16, 163, 127, 0.15);
+                --theme-color-0_16: rgba(16, 163, 127, 0.16);
+                --theme-color-0_17: rgba(16, 163, 127, 0.17);
+                --theme-color-0_18: rgba(16, 163, 127, 0.18);
+                --theme-color-0_19: rgba(16, 163, 127, 0.19);
+                --theme-color-0_2: rgba(16, 163, 127, 0.2);
+                --theme-color-0_21: rgba(16, 163, 127, 0.21);
+                --theme-color-0_22: rgba(16, 163, 127, 0.22);
+                --theme-color-0_23: rgba(16, 163, 127, 0.23);
+                --theme-color-0_24: rgba(16, 163, 127, 0.24);
+                --theme-color-0_25: rgba(16, 163, 127, 0.25);
+                --theme-color-0_26: rgba(16, 163, 127, 0.26);
+                --theme-color-0_27: rgba(16, 163, 127, 0.27);
+                --theme-color-0_28: rgba(16, 163, 127, 0.28);
+                --theme-color-0_29: rgba(16, 163, 127, 0.29);
+                --theme-color-0_3: rgba(16, 163, 127, 0.3);
+                --theme-color-0_31: rgba(16, 163, 127, 0.31);
+                --theme-color-0_32: rgba(16, 163, 127, 0.32);
+                --theme-color-0_33: rgba(16, 163, 127, 0.33);
+                --theme-color-0_34: rgba(16, 163, 127, 0.34);
+                --theme-color-0_35: rgba(16, 163, 127, 0.35);
+                --theme-color-0_36: rgba(16, 163, 127, 0.36);
+                --theme-color-0_37: rgba(16, 163, 127, 0.37);
+                --theme-color-0_38: rgba(16, 163, 127, 0.38);
+                --theme-color-0_39: rgba(16, 163, 127, 0.39);
+                --theme-color-0_4: rgba(16, 163, 127, 0.4);
+                --theme-color-0_41: rgba(16, 163, 127, 0.41);
+                --theme-color-0_42: rgba(16, 163, 127, 0.42);
+                --theme-color-0_43: rgba(16, 163, 127, 0.43);
+                --theme-color-0_44: rgba(16, 163, 127, 0.44);
+                --theme-color-0_45: rgba(16, 163, 127, 0.45);
+                --theme-color-0_46: rgba(16, 163, 127, 0.46);
+                --theme-color-0_47: rgba(16, 163, 127, 0.47);
+                --theme-color-0_48: rgba(16, 163, 127, 0.48);
+                --theme-color-0_49: rgba(16, 163, 127, 0.49);
+                --theme-color-0_5: rgba(16, 163, 127, 0.5);
+                --theme-color-0_51: rgba(16, 163, 127, 0.51);
+                --theme-color-0_52: rgba(16, 163, 127, 0.52);
+                --theme-color-0_53: rgba(16, 163, 127, 0.53);
+                --theme-color-0_54: rgba(16, 163, 127, 0.54);
+                --theme-color-0_55: rgba(16, 163, 127, 0.55);
+                --theme-color-0_56: rgba(16, 163, 127, 0.56);
+                --theme-color-0_57: rgba(16, 163, 127, 0.57);
+                --theme-color-0_58: rgba(16, 163, 127, 0.58);
+                --theme-color-0_59: rgba(16, 163, 127, 0.59);
+                --theme-color-0_6: rgba(16, 163, 127, 0.6);
+                --theme-color-0_61: rgba(16, 163, 127, 0.61);
+                --theme-color-0_62: rgba(16, 163, 127, 0.62);
+                --theme-color-0_63: rgba(16, 163, 127, 0.63);
+                --theme-color-0_64: rgba(16, 163, 127, 0.64);
+                --theme-color-0_65: rgba(16, 163, 127, 0.65);
+                --theme-color-0_66: rgba(16, 163, 127, 0.66);
+                --theme-color-0_67: rgba(16, 163, 127, 0.67);
+                --theme-color-0_68: rgba(16, 163, 127, 0.68);
+                --theme-color-0_69: rgba(16, 163, 127, 0.69);
+                --theme-color-0_7: rgba(16, 163, 127, 0.7);
+                --theme-color-0_71: rgba(16, 163, 127, 0.71);
+                --theme-color-0_72: rgba(16, 163, 127, 0.72);
+                --theme-color-0_73: rgba(16, 163, 127, 0.73);
+                --theme-color-0_74: rgba(16, 163, 127, 0.74);
+                --theme-color-0_75: rgba(16, 163, 127, 0.75);
+                --theme-color-0_76: rgba(16, 163, 127, 0.76);
+                --theme-color-0_77: rgba(16, 163, 127, 0.77);
+                --theme-color-0_78: rgba(16, 163, 127, 0.78);
+                --theme-color-0_79: rgba(16, 163, 127, 0.79);
+                --theme-color-0_8: rgba(16, 163, 127, 0.8);
+                --theme-color-0_81: rgba(16, 163, 127, 0.81);
+                --theme-color-0_82: rgba(16, 163, 127, 0.82);
+                --theme-color-0_83: rgba(16, 163, 127, 0.83);
+                --theme-color-0_84: rgba(16, 163, 127, 0.84);
+                --theme-color-0_85: rgba(16, 163, 127, 0.85);
+                --theme-color-0_86: rgba(16, 163, 127, 0.86);
+                --theme-color-0_87: rgba(16, 163, 127, 0.87);
+                --theme-color-0_88: rgba(16, 163, 127, 0.88);
+                --theme-color-0_89: rgba(16, 163, 127, 0.89);
+                --theme-color-0_9: rgba(16, 163, 127, 0.9);
+                --theme-color-0_91: rgba(16, 163, 127, 0.91);
+                --theme-color-0_92: rgba(16, 163, 127, 0.92);
+                --theme-color-0_93: rgba(16, 163, 127, 0.93);
+                --theme-color-0_94: rgba(16, 163, 127, 0.94);
+                --theme-color-0_95: rgba(16, 163, 127, 0.95);
+                --theme-color-0_96: rgba(16, 163, 127, 0.96);
+                --theme-color-0_97: rgba(16, 163, 127, 0.97);
+                --theme-color-0_98: rgba(16, 163, 127, 0.98);
+                --theme-color-0_99: rgba(16, 163, 127, 0.99);
+                --theme-color-1: rgba(16, 163, 127, 1);
+            }
+        </style>
+
         <style class="adjust-screen-brightness" media="screen">
             html.adjust-brightness::before {
                 content: " ";
@@ -15,6 +165,7 @@
                 background-color: rgba(0, 0, 0, 0.41000000000000003);
             }
         </style>
+
         <style type="text/css">
             .tippy-touch {
                 cursor: pointer !important
@@ -672,153 +823,7 @@
                 background-color: #555 !important;
             }
         </style>
-        <title>Dashboard - {{ config('app.name', 'Laravel') }}</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <meta name="author" content="{{ config('app.name', 'Laravel') }}">
-        <meta name="keywords" content="">
-        <meta name="description" content="">
-        <link rel="dns-prefetch" href="//fonts.googleapis.com">
-        <link rel="dns-prefetch" href="//google.com">
-        <link rel="dns-prefetch" href="//apis.google.com">
-        <link rel="dns-prefetch" href="//ajax.googleapis.com">
-        <link rel="dns-prefetch" href="//www.google-analytics.com">
-        <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
-        <link rel="dns-prefetch" href="//gstatic.com">
-        <link rel="dns-prefetch" href="//oss.maxcdn.com">
-        <link rel="dns-prefetch" href="//fonts.gstatic.com">
 
-        <!-- Scripts -->
-        @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-
-        <meta property="fb:app_id" content="">
-        <meta property="og:site_name" content="{{ config('app.name', 'Laravel') }}">
-        <meta property="og:locale" content="en_US">
-        <meta property="og:url" content="{{ url('/') }}/dashboard">
-        <meta property="og:title" content="Dashboard - {{ config('app.name', 'Laravel') }}">
-        <meta property="og:description" content="">
-        <meta property="og:type" content="website">
-        <meta property="og:image" content="{{ url('/') }}/dashboard-assets/img/storage/logo/2024283059.png">
-        <meta property="twitter:card" content="summary">
-        <meta property="twitter:title" content="Dashboard - {{ config('app.name', 'Laravel') }}">
-        <meta property="twitter:description" content="">
-        <meta property="twitter:domain" content="{{ url('/') }}">
-        <meta name="twitter:image:src" content="{{ url('/') }}/dashboard-assets/img/storage/logo/2024283059.png">
-        <link rel="shortcut icon" href="{{ url('/') }}/dashboard-assets/img/storage/logo/400028613.png">
-        <script async="">
-            var themecolor = '#10a37f';
-            var mapcolor = '#8080ff';
-            var siteurl = "{{ url('/') }}";
-            var template_name = 'classic-theme';
-            window.site_base_url = window.site_base_url || "{{ url('/') }}";
-        </script>
-        <!--Loop for Theme Color codes-->
-        <style>
-            :root {
-                --theme-color-0_01: rgba(16, 163, 127, 0.01);
-                --theme-color-0_02: rgba(16, 163, 127, 0.02);
-                --theme-color-0_03: rgba(16, 163, 127, 0.03);
-                --theme-color-0_04: rgba(16, 163, 127, 0.04);
-                --theme-color-0_05: rgba(16, 163, 127, 0.05);
-                --theme-color-0_06: rgba(16, 163, 127, 0.06);
-                --theme-color-0_07: rgba(16, 163, 127, 0.07);
-                --theme-color-0_08: rgba(16, 163, 127, 0.08);
-                --theme-color-0_09: rgba(16, 163, 127, 0.09);
-                --theme-color-0_1: rgba(16, 163, 127, 0.1);
-                --theme-color-0_11: rgba(16, 163, 127, 0.11);
-                --theme-color-0_12: rgba(16, 163, 127, 0.12);
-                --theme-color-0_13: rgba(16, 163, 127, 0.13);
-                --theme-color-0_14: rgba(16, 163, 127, 0.14);
-                --theme-color-0_15: rgba(16, 163, 127, 0.15);
-                --theme-color-0_16: rgba(16, 163, 127, 0.16);
-                --theme-color-0_17: rgba(16, 163, 127, 0.17);
-                --theme-color-0_18: rgba(16, 163, 127, 0.18);
-                --theme-color-0_19: rgba(16, 163, 127, 0.19);
-                --theme-color-0_2: rgba(16, 163, 127, 0.2);
-                --theme-color-0_21: rgba(16, 163, 127, 0.21);
-                --theme-color-0_22: rgba(16, 163, 127, 0.22);
-                --theme-color-0_23: rgba(16, 163, 127, 0.23);
-                --theme-color-0_24: rgba(16, 163, 127, 0.24);
-                --theme-color-0_25: rgba(16, 163, 127, 0.25);
-                --theme-color-0_26: rgba(16, 163, 127, 0.26);
-                --theme-color-0_27: rgba(16, 163, 127, 0.27);
-                --theme-color-0_28: rgba(16, 163, 127, 0.28);
-                --theme-color-0_29: rgba(16, 163, 127, 0.29);
-                --theme-color-0_3: rgba(16, 163, 127, 0.3);
-                --theme-color-0_31: rgba(16, 163, 127, 0.31);
-                --theme-color-0_32: rgba(16, 163, 127, 0.32);
-                --theme-color-0_33: rgba(16, 163, 127, 0.33);
-                --theme-color-0_34: rgba(16, 163, 127, 0.34);
-                --theme-color-0_35: rgba(16, 163, 127, 0.35);
-                --theme-color-0_36: rgba(16, 163, 127, 0.36);
-                --theme-color-0_37: rgba(16, 163, 127, 0.37);
-                --theme-color-0_38: rgba(16, 163, 127, 0.38);
-                --theme-color-0_39: rgba(16, 163, 127, 0.39);
-                --theme-color-0_4: rgba(16, 163, 127, 0.4);
-                --theme-color-0_41: rgba(16, 163, 127, 0.41);
-                --theme-color-0_42: rgba(16, 163, 127, 0.42);
-                --theme-color-0_43: rgba(16, 163, 127, 0.43);
-                --theme-color-0_44: rgba(16, 163, 127, 0.44);
-                --theme-color-0_45: rgba(16, 163, 127, 0.45);
-                --theme-color-0_46: rgba(16, 163, 127, 0.46);
-                --theme-color-0_47: rgba(16, 163, 127, 0.47);
-                --theme-color-0_48: rgba(16, 163, 127, 0.48);
-                --theme-color-0_49: rgba(16, 163, 127, 0.49);
-                --theme-color-0_5: rgba(16, 163, 127, 0.5);
-                --theme-color-0_51: rgba(16, 163, 127, 0.51);
-                --theme-color-0_52: rgba(16, 163, 127, 0.52);
-                --theme-color-0_53: rgba(16, 163, 127, 0.53);
-                --theme-color-0_54: rgba(16, 163, 127, 0.54);
-                --theme-color-0_55: rgba(16, 163, 127, 0.55);
-                --theme-color-0_56: rgba(16, 163, 127, 0.56);
-                --theme-color-0_57: rgba(16, 163, 127, 0.57);
-                --theme-color-0_58: rgba(16, 163, 127, 0.58);
-                --theme-color-0_59: rgba(16, 163, 127, 0.59);
-                --theme-color-0_6: rgba(16, 163, 127, 0.6);
-                --theme-color-0_61: rgba(16, 163, 127, 0.61);
-                --theme-color-0_62: rgba(16, 163, 127, 0.62);
-                --theme-color-0_63: rgba(16, 163, 127, 0.63);
-                --theme-color-0_64: rgba(16, 163, 127, 0.64);
-                --theme-color-0_65: rgba(16, 163, 127, 0.65);
-                --theme-color-0_66: rgba(16, 163, 127, 0.66);
-                --theme-color-0_67: rgba(16, 163, 127, 0.67);
-                --theme-color-0_68: rgba(16, 163, 127, 0.68);
-                --theme-color-0_69: rgba(16, 163, 127, 0.69);
-                --theme-color-0_7: rgba(16, 163, 127, 0.7);
-                --theme-color-0_71: rgba(16, 163, 127, 0.71);
-                --theme-color-0_72: rgba(16, 163, 127, 0.72);
-                --theme-color-0_73: rgba(16, 163, 127, 0.73);
-                --theme-color-0_74: rgba(16, 163, 127, 0.74);
-                --theme-color-0_75: rgba(16, 163, 127, 0.75);
-                --theme-color-0_76: rgba(16, 163, 127, 0.76);
-                --theme-color-0_77: rgba(16, 163, 127, 0.77);
-                --theme-color-0_78: rgba(16, 163, 127, 0.78);
-                --theme-color-0_79: rgba(16, 163, 127, 0.79);
-                --theme-color-0_8: rgba(16, 163, 127, 0.8);
-                --theme-color-0_81: rgba(16, 163, 127, 0.81);
-                --theme-color-0_82: rgba(16, 163, 127, 0.82);
-                --theme-color-0_83: rgba(16, 163, 127, 0.83);
-                --theme-color-0_84: rgba(16, 163, 127, 0.84);
-                --theme-color-0_85: rgba(16, 163, 127, 0.85);
-                --theme-color-0_86: rgba(16, 163, 127, 0.86);
-                --theme-color-0_87: rgba(16, 163, 127, 0.87);
-                --theme-color-0_88: rgba(16, 163, 127, 0.88);
-                --theme-color-0_89: rgba(16, 163, 127, 0.89);
-                --theme-color-0_9: rgba(16, 163, 127, 0.9);
-                --theme-color-0_91: rgba(16, 163, 127, 0.91);
-                --theme-color-0_92: rgba(16, 163, 127, 0.92);
-                --theme-color-0_93: rgba(16, 163, 127, 0.93);
-                --theme-color-0_94: rgba(16, 163, 127, 0.94);
-                --theme-color-0_95: rgba(16, 163, 127, 0.95);
-                --theme-color-0_96: rgba(16, 163, 127, 0.96);
-                --theme-color-0_97: rgba(16, 163, 127, 0.97);
-                --theme-color-0_98: rgba(16, 163, 127, 0.98);
-                --theme-color-0_99: rgba(16, 163, 127, 0.99);
-                --theme-color-1: rgba(16, 163, 127, 1);
-            }
-
-        </style>
         <!--Loop for Theme Color codes-->
         <link rel="stylesheet" href="{{ url('/') }}/dashboard-assets/css/flags.min.css">
         <link rel="stylesheet" href="{{ url('/') }}/dashboard-assets/css/icons.css">
@@ -1403,12 +1408,12 @@
         <script src="{{ url('/') }}/dashboard-assets/js/bootstrap-slider.min.js"></script>
         <script src="{{ url('/') }}/dashboard-assets/js/bootstrap-select.min.js"></script>
         <script src="{{ url('/') }}/dashboard-assets/js/snackbar.js"></script>
-        <script src="{{ url('/') }}/dashboard-assets/js/counterup.min.js"></script>
         <script src="{{ url('/') }}/dashboard-assets/js/magnific-popup.min.js"></script>
         <script src="{{ url('/') }}/dashboard-assets/js/slick.min.js"></script>
         <script src="{{ url('/') }}/dashboard-assets/js/jquery.cookie.min.js"></script>
         <script src="{{ url('/') }}/dashboard-assets/js/custom.js"></script>
         <script src="{{ url('/') }}/dashboard-assets/js/chart.min.js"></script>
+        <script src="{{ url('/') }}/dashboard-assets/js/counterup.min.js"></script>
         <script>
             Chart.defaults.global.defaultFontFamily = "Nunito";
             Chart.defaults.global.defaultFontColor = '#888';
