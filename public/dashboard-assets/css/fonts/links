@@ -1,0 +1,7 @@
+#https://quickai.bylancer.com/includes/assets/css/icons.css
+
+mkdir -p fonts/feather-icons fonts/Material-Icons fonts/font-awesome/fonts
+
+wget -c 'https://quickai.bylancer.com/includes/assets/css/fonts/feather-icons/Feather-Icons.woff' -O './feather-icons/Feather-Icons.woff'
+wget -c 'https://quickai.bylancer.com/includes/assets/css/fonts/Material-Icons/Material-Icons.woff' -O './Material-Icons/Material-Icons.woff'
+wget -c 'https://quickai.bylancer.com/includes/assets/css/fonts/font-awesome/fonts/fontawesome-webfont.woff?v=4.5.0' -O './font-awesome/fonts/fontawesome-webfont.woff'
