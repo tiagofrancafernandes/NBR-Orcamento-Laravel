@@ -1227,39 +1227,14 @@
                                         </ul>
                                     </nav>
                                 </div>
+
+                                @hasSection ('fun_facts')
                                 <!-- Fun Facts Container -->
                                 <div class="fun-facts-container">
-                                    <div class="fun-fact" data-fun-fact-color="#b81b7f">
-                                        <div class="fun-fact-text">
-                                            <span>Words Used</span>
-                                            <h4> 1,720,479 <small>/ 10,000,000</small>
-                                            </h4>
-                                        </div>
-                                        <div class="fun-fact-icon" style="background-color: rgba(184, 27, 127, 0.07);">
-                                            <i class="icon-feather-trending-up" style="color: rgb(184, 27, 127);"></i>
-                                        </div>
-                                    </div>
-                                    <div class="fun-fact" data-fun-fact-color="#36bd78">
-                                        <div class="fun-fact-text">
-                                            <span>Images Used</span>
-                                            <h4> 2,611 <small>/ 5,000</small>
-                                            </h4>
-                                        </div>
-                                        <div class="fun-fact-icon" style="background-color: rgba(54, 189, 120, 0.07);">
-                                            <i class="icon-feather-bar-chart-2" style="color: rgb(54, 189, 120);"></i>
-                                        </div>
-                                    </div>
-                                    <div class="fun-fact" data-fun-fact-color="#efa80f">
-                                        <div class="fun-fact-text">
-                                            <span>Speech to Text</span>
-                                            <h4> 5 <small>/ 10</small>
-                                            </h4>
-                                        </div>
-                                        <div class="fun-fact-icon" style="background-color: rgba(239, 168, 15, 0.07);">
-                                            <i class="icon-feather-headphones" style="color: rgb(239, 168, 15);"></i>
-                                        </div>
-                                    </div>
+                                    @yield('fun_facts')
                                 </div>
+                                @endif
+
                                 <!-- Dashboard Box -->
                                 <div class="dashboard-box main-box-in-row">
                                     <div class="headline">

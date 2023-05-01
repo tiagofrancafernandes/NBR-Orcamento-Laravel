@@ -19,5 +19,5 @@ Route::get('/home', fn () => redirect()->route('admin.index'));
 Auth::routes();
 
 Route::name('admin.')->prefix('admin')->middleware(['auth'])->group(function () {
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+    Route::get('/', [App\Http\Controllers\Admin\MainDashboardController::class, 'index'])->name('index');
 });
