@@ -1,0 +1,2 @@
+- Downloaded in: 2023-05-01
+- https://github.com/rezaamini-ir/laravel-easyblade/archive/refs/heads/master.zip

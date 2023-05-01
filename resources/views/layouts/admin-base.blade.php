@@ -1134,7 +1134,7 @@
                                     <!-- Navigation -->
                                     <div class="dashboard-nav">
                                         <div class="dashboard-nav-inner">
-                                            <ul data-submenu-title="My Account">
+                                            <ul data-submenu-title="Dashboards">
                                                 <li class="active">
                                                     <a href="{{ url('/') }}/dashboard">
                                                         <i
@@ -1154,6 +1154,28 @@
                                                     </ul>
                                                 </li>
                                             </ul>
+
+                                            <ul data-submenu-title="Composições">
+                                                <li
+                                                    class="@isActive('composicoes.index', 'active', 'deactive')"
+                                                >
+                                                    <a href="{{ route('composicoes.index') }}">
+                                                        Todas as composições
+                                                    </a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="#"><i class="icon-feather-file-text"></i> My Documents</a>
+                                                    <ul>
+                                                        <li class=""><a
+                                                                                                              href="{{ url('/') }}/all-documents">All
+                                                                Documents</a></li>
+                                                        <li class=""><a
+                                                                                                              href="{{ url('/') }}/all-images">All
+                                                                AI Images</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+
                                             <ul data-submenu-title="Organize and Manage">
                                                 <li class="">
                                                     <a href="{{ url('/') }}/ai-templates"><i

@@ -21,7 +21,7 @@
 
 @section('content')
     {{-- @include('admin.main-dashboard.chart') --}}
-    <x-dash-base.content-card icon="feather-bar-chart-2" headline="Alguma coisa">
+    <x-dash-base.content-card icon="feather-bar-chart-2" headline="Composicoes">
         <div>
             <h3>Composicoes</h3>
 
