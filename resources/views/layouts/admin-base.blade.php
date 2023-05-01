@@ -1135,9 +1135,13 @@
                                     <div class="dashboard-nav">
                                         <div class="dashboard-nav-inner">
                                             <ul data-submenu-title="My Account">
-                                                <li class="active"><a href="{{ url('/') }}/dashboard"><i
+                                                <li class="active">
+                                                    <a href="{{ url('/') }}/dashboard">
+                                                        <i
                                                                                                           class="icon-feather-grid"></i>
-                                                        Dashboard</a></li>
+                                                        Dashboard
+                                                    </a>
+                                                </li>
                                                 <li class="">
                                                     <a href="#"><i class="icon-feather-file-text"></i> My Documents</a>
                                                     <ul>

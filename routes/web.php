@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\ComposicaoController;
+use App\Http\Controllers\Admin\MainDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,11 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', fn () => redirect()->route('admin.index'));
-Route::get('/home', fn () => redirect()->route('admin.index'));
+Route::get('/', fn () => redirect()->route('main_dashboard.index'));
+Route::get('/home', fn () => redirect()->route('main_dashboard.index'));
 
 Auth::routes();
 
-Route::name('admin.')->prefix('admin')->middleware(['auth'])->group(function () {
-    Route::get('/', [App\Http\Controllers\Admin\MainDashboardController::class, 'index'])->name('index');
+Route::prefix('admin')->middleware(['auth'])->group(function () {
+    Route::get('/', [MainDashboardController::class, 'index'])->name('main_dashboard.index');
+
+    Route::prefix('composicoes')->name('composicoes.')->group(function () {
+        Route::get('/', [ComposicaoController::class, 'index'])->name('index');
+    });
 });
