@@ -21,7 +21,8 @@
 
         <!-- Scripts -->
         @vite([
-            'public/dashboard-assets/styles.css',
+            'resources/sass/app.scss',
+            'public/dashboard-assets/styles.scss',
             'resources/js/app.js',
         ])
 
@@ -825,13 +826,14 @@
         </style>
 
         <!--Loop for Theme Color codes-->
-        <link rel="stylesheet" href="{{ url('/') }}/dashboard-assets/css/flags.min.css">
-        <link rel="stylesheet" href="{{ url('/') }}/dashboard-assets/css/icons.css">
+        {{-- <link rel="stylesheet" href="{{ url('/') }}/dashboard-assets/css/flags.min.css"> --}}
+        {{-- <link rel="stylesheet" href="{{ url('/') }}/dashboard-assets/css/icons.css"> --}}
 
-        {{-- <link rel="stylesheet" href="{{ url('/') }}/dashboard-assets/css/style.css"> --}}
-        <link rel="stylesheet" href="{{ asset('dashboard-assets/css/dash-style.css') }}">
+        {{-- <link rel="stylesheet" href="{{ url('/') }}/dashboard-assets/css/styles.css"> --}}
+        {{-- <link rel="stylesheet" href="{{ asset('dashboard-assets/css/dash-style.css') }}"> --}}
+        {{-- <link rel="stylesheet" href="{{ asset('dashboard-assets/css/highlight.dark.min.css') }}"> --}}
 
-        <link rel="stylesheet" href="{{ url('/') }}/dashboard-assets/css/color.css">
+        {{-- <link rel="stylesheet" href="{{ url('/') }}/dashboard-assets/css/color.css"> --}}
         <script src="{{ url('/') }}/dashboard-assets/js/jquery.min.js"></script>
 
         <!-- ===External Code=== -->
@@ -1135,22 +1137,27 @@
                                     <div class="dashboard-nav">
                                         <div class="dashboard-nav-inner">
                                             <ul data-submenu-title="Dashboards">
-                                                <li class="active">
-                                                    <a href="{{ url('/') }}/dashboard">
-                                                        <i
-                                                                                                          class="icon-feather-grid"></i>
-                                                        Dashboard
+                                                <li
+                                                    class="@isActive('composicoes.index', 'active', 'deactive')"
+                                                >
+                                                    <a href="{{ route('main_dashboard.index') }}">
+                                                        <i class="icon-feather-grid"></i>
+                                                        Main dashboard
                                                     </a>
                                                 </li>
                                                 <li class="">
                                                     <a href="#"><i class="icon-feather-file-text"></i> My Documents</a>
                                                     <ul>
-                                                        <li class=""><a
-                                                                                                              href="{{ url('/') }}/all-documents">All
-                                                                Documents</a></li>
-                                                        <li class=""><a
-                                                                                                              href="{{ url('/') }}/all-images">All
-                                                                AI Images</a></li>
+                                                        <li class="">
+                                                            <a href="{{ url('/') }}/all-documents">
+                                                                All Documents
+                                                            </a>
+                                                        </li>
+                                                        <li class="">
+                                                            <a href="{{ url('/') }}/all-images">
+                                                                All AI Images
+                                                            </a>
+                                                        </li>
                                                     </ul>
                                                 </li>
                                             </ul>

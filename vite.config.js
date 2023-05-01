@@ -10,7 +10,7 @@ export default defineConfig({
                 'resources/js/app.js',
 
                 'public/dashboard-assets/scripts.js',
-                'public/dashboard-assets/styles.css',
+                'public/dashboard-assets/styles.scss',
             ],
             refresh: true,
         }),

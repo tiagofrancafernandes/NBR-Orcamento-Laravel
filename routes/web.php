@@ -27,3 +27,11 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::get('/', [ComposicaoController::class, 'index'])->name('index');
     });
 });
+
+Route::get('/try/view', function (\Illuminate\Http\Request $request) {
+    $request->validate([
+        'view' => 'required|string|min:1'
+    ]);
+
+    return view($request->get('view'));
+})->name('try.view');

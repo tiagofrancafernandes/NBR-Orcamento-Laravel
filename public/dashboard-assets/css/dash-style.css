@@ -1850,7 +1850,9 @@ body #submit_map {outline: none;margin-bottom: 30px }
 .leaflet-control-layers-selector {margin-top: 2px;position: relative;top: 1px }
 .leaflet-control-layers label {display: block }
 .leaflet-control-layers-separator {height: 0;border-top: 1px solid #ddd;margin: 5px -10px 5px -6px }
-.leaflet-default-icon-path {background-image: url(images/marker-icon.html) }
+.leaflet-default-icon-path {
+    /* background-image: url(images/marker-icon.html); */
+}
 .leaflet-container .leaflet-control-attribution {background: #fff;margin: 10px;border-radius: 3px;padding: 4px 8px;color: #777;font-weight: 500;line-height: 15px }
 .leaflet-container .leaflet-control-attribution a {color: #333;text-decoration: none !important }
 .leaflet-control-attribution, .leaflet-control-scale-line {padding: 0 5px;color: #333 }
@@ -1992,7 +1994,7 @@ body #submit_map {outline: none;margin-bottom: 30px }
 }
 #leaflet-geocode-cont ul li.powered-by-osm {display: block;padding: 9px 0;padding-right: 20px;font-size: 12px;font-weight: 500;color: #999;pointer-events: none;text-align: right }
 #leaflet-geocode-cont ul li.powered-by-osm strong {color: #333;position: relative;padding-left: 26px }
-#leaflet-geocode-cont ul li.powered-by-osm strong:before {background-image: url(../../../../i.imgur.com/YaiaYGw.png);background-repeat: no-repeat;background-size: contain;content: "";height: 17px;width: 17px;display: inline-block;position: absolute;left: 5px;top: -2px }
+#leaflet-geocode-cont ul li.powered-by-osm strong:before {background-image: url(//i.imgur.com/YaiaYGw.png);background-repeat: no-repeat;background-size: contain;content: "";height: 17px;width: 17px;display: inline-block;position: absolute;left: 5px;top: -2px }
 #leaflet-geocode-cont ul li.powered-by-osm:before {content: "" }
 .leaflet-control-geocoder {border-radius: 4px;background: #fff;min-width: 26px;min-height: 26px }
 .leaflet-touch .leaflet-control-geocoder {min-width: 30px;min-height: 30px }

@@ -69,7 +69,17 @@ span.button, button.button, input[type=button], input[type=submit], a.button {bo
 }
 a.apply-now-button {box-shadow: 0 2px 8px var(--theme-color-0_15) }
 a.apply-now-button:hover {box-shadow: 0 2px 8px var(--theme-color-0_35) }
-.dashboard-nav ul li.active-submenu, .dashboard-nav ul li.active, .dashboard-nav ul li:hover {background-color: var(--theme-color-0_04) }
+
+.dashboard-nav ul li {
+    font-weight: 200;
+}
+
+.dashboard-nav ul li.active-submenu, .dashboard-nav ul li.active, .dashboard-nav ul li:hover {
+    background-color: var(--theme-color-0_04);
+}
+.dashboard-nav ul li.active, .dashboard-nav ul li:hover {
+    font-weight: 600;
+}
 .dashboard-nav ul li.active-submenu a:after, .dashboard-nav ul li.active a:after, .dashboard-nav ul li:hover a:after {background: var(--theme-color-0_13) }
 .dashboard-box-list .button {box-shadow: 0 3px 8px var(--theme-color-0_15) }
 .dashboard-box .button.dark:not(.ico):hover {box-shadow: 0 3px 8px var(--theme-color-0_25) }
