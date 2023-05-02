@@ -1313,27 +1313,67 @@
                 </div>
             </div>
         </div>
-        <!-- Wrapper / End -->
-        <script>
-            $(document).ready(function () {
-                $("#header-container").removeClass('transparent-header').addClass('dashboard-header sticky');
-                $('.header-icon').removeClass('d-none');
-            });
 
-            /* THIS PORTION OF CODE IS ONLY EXECUTED WHEN THE USER THE LANGUAGE(CLIENT-SIDE) */
-            $(function () {
-                $('.language-switcher').on('click', '.dropdown-menu li', function (e) {
-                    e.preventDefault();
-                    var lang = $(this).data('lang');
-                    if (lang != null) {
-                        var res = lang.substr(0, 2);
-                        $('#selected_lang').html(res);
-                        $.cookie('Quick_lang', lang, { path: '/' });
-                        location.reload();
+        <!-- Scripts -->
+        <script src="{{ url('/') }}/dashboard-assets/js/chosen.min.js"></script>
+        <script src="{{ url('/') }}/dashboard-assets/js/jquery.lazyload.min.js"></script>
+        <script src="{{ url('/') }}/dashboard-assets/js/tippy.all.min.js"></script>
+        <script src="{{ url('/') }}/dashboard-assets/js/simplebar.min.js"></script>
+        <script src="{{ url('/') }}/dashboard-assets/js/bootstrap-slider.min.js"></script>
+        <script src="{{ url('/') }}/dashboard-assets/js/bootstrap-select.min.js"></script>
+        <script src="{{ url('/') }}/dashboard-assets/js/snackbar.js"></script>
+        <script src="{{ url('/') }}/dashboard-assets/js/magnific-popup.min.js"></script>
+        <script src="{{ url('/') }}/dashboard-assets/js/slick.min.js"></script>
+        <script src="{{ url('/') }}/dashboard-assets/js/jquery.cookie.min.js"></script>
+        <script src="{{ url('/') }}/dashboard-assets/js/custom.js"></script>
+        <script src="{{ url('/') }}/dashboard-assets/js/chart.min.js"></script>
+        {{-- <script src="{{ url('/') }}/dashboard-assets/js/counterup.min.js"></script> --}}
+        <!-- Footer / End -->
+
+        <script>
+            window.addEventListener('load', (event) => {
+                let lastKnownScrollPosition = 0;
+                let ticking = false;
+
+                function toggleFixedHeader(isDown) {
+                    // let headerContainer = document.querySelector('#header-container');
+                    let headerContainer = document.querySelector('.dashboard-container .dashboard-sidebar');
+
+                    if (!headerContainer) {
+                        return;
+                    }
+
+                    if (isDown) {
+                        headerContainer.classList.add('fixed-navbar');
+                        return;
+                    }
+
+                    headerContainer.classList.remove('fixed-navbar');
+                }
+
+                function actionsPositionBased(scrollPos) {
+                    let isDown = scrollPos > 120;
+
+                    toggleFixedHeader(isDown);
+                }
+
+                actionsPositionBased(window.scrollY);
+
+                document.addEventListener("scroll", (event) => {
+                    lastKnownScrollPosition = window.scrollY;
+
+                    if (!ticking) {
+                        window.requestAnimationFrame(() => {
+                            actionsPositionBased(lastKnownScrollPosition);
+                            ticking = false;
+                        });
+
+                        ticking = true;
                     }
                 });
             });
         </script>
+
         <script>
             var session_uname = "demo";
             var session_uid = "1";
@@ -1383,134 +1423,29 @@
                 var rtl = false;
             }
         </script>
-        <!-- Scripts -->
-        <script src="{{ url('/') }}/dashboard-assets/js/chosen.min.js"></script>
-        <script src="{{ url('/') }}/dashboard-assets/js/jquery.lazyload.min.js"></script>
-        <script src="{{ url('/') }}/dashboard-assets/js/tippy.all.min.js"></script>
-        <script src="{{ url('/') }}/dashboard-assets/js/simplebar.min.js"></script>
-        <script src="{{ url('/') }}/dashboard-assets/js/bootstrap-slider.min.js"></script>
-        <script src="{{ url('/') }}/dashboard-assets/js/bootstrap-select.min.js"></script>
-        <script src="{{ url('/') }}/dashboard-assets/js/snackbar.js"></script>
-        <script src="{{ url('/') }}/dashboard-assets/js/magnific-popup.min.js"></script>
-        <script src="{{ url('/') }}/dashboard-assets/js/slick.min.js"></script>
-        <script src="{{ url('/') }}/dashboard-assets/js/jquery.cookie.min.js"></script>
-        <script src="{{ url('/') }}/dashboard-assets/js/custom.js"></script>
-        <script src="{{ url('/') }}/dashboard-assets/js/chart.min.js"></script>
-        <script src="{{ url('/') }}/dashboard-assets/js/counterup.min.js"></script>
+
+        <!-- Wrapper / End -->
         <script>
-            Chart.defaults.global.defaultFontFamily = "Nunito";
-            Chart.defaults.global.defaultFontColor = '#888';
-            Chart.defaults.global.defaultFontSize = '14';
-
-            var ctx = document.getElementById('chart').getContext('2d');
-
-            var chart = new Chart(ctx, {
-                type: 'line',
-
-                // The data for our dataset
-                data: {
-                    labels: ["01 Apr", "02 Apr", "03 Apr", "04 Apr", "05 Apr", "06 Apr", "07 Apr", "08 Apr", "09 Apr", "10 Apr", "11 Apr", "12 Apr", "13 Apr", "14 Apr", "15 Apr", "16 Apr", "17 Apr", "18 Apr", "19 Apr", "20 Apr", "21 Apr", "22 Apr", "23 Apr", "24 Apr", "25 Apr", "26 Apr", "27 Apr", "28 Apr", "29 Apr", "30 Apr"],
-                    // Information about the dataset
-                    datasets: [{
-                        label: "Words Used",
-                        backgroundColor: '#10a37f15',
-                        borderColor: '#10a37f',
-                        borderWidth: "3",
-                        data: ["22069", "66799", "144960", "134233", "157532", "140549", "146710", "116944", "70601", "77957", "255183", "214260", "172682", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        pointRadius: 5,
-                        pointHoverRadius: 5,
-                        pointHitRadius: 10,
-                        pointBackgroundColor: "#fff",
-                        pointHoverBackgroundColor: "#fff",
-                        pointBorderWidth: "2",
-                    }]
-                },
-
-                // Configuration options
-                options: {
-                    layout: {
-                        padding: 10,
-                    },
-                    legend: { display: false },
-                    title: { display: false },
-                    scales: {
-                        yAxes: [{
-                            scaleLabel: {
-                                display: false
-                            },
-                            gridLines: {
-                                borderDash: [6, 10],
-                                color: "#d8d8d8",
-                                lineWidth: 1,
-                            },
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }],
-                        xAxes: [{
-                            scaleLabel: { display: false },
-                            gridLines: { display: false },
-                        }],
-                    },
-                    tooltips: {
-                        backgroundColor: '#333',
-                        titleFontSize: 13,
-                        titleFontColor: '#fff',
-                        bodyFontColor: '#fff',
-                        bodyFontSize: 13,
-                        displayColors: false,
-                        xPadding: 10,
-                        yPadding: 10,
-                        intersect: false
-                    }
-                },
+            $(document).ready(function () {
+                $("#header-container").removeClass('transparent-header').addClass('dashboard-header sticky');
+                $('.header-icon').removeClass('d-none');
             });
 
-        </script>
-        <!-- Footer / End -->
-
-        <script>
-            window.addEventListener('load', (event) => {
-                let lastKnownScrollPosition = 0;
-                let ticking = false;
-
-                function toggleFixedHeader(isDown) {
-                    // let headerContainer = document.querySelector('#header-container');
-                    let headerContainer = document.querySelector('.dashboard-container .dashboard-sidebar');
-
-                    if (!headerContainer) {
-                        return;
-                    }
-
-                    if (isDown) {
-                        headerContainer.classList.add('fixed-navbar');
-                        return;
-                    }
-
-                    headerContainer.classList.remove('fixed-navbar');
-                }
-
-                function actionsPositionBased(scrollPos) {
-                    let isDown = scrollPos > 120;
-
-                    toggleFixedHeader(isDown);
-                }
-
-                actionsPositionBased(window.scrollY);
-
-                document.addEventListener("scroll", (event) => {
-                    lastKnownScrollPosition = window.scrollY;
-
-                    if (!ticking) {
-                        window.requestAnimationFrame(() => {
-                            actionsPositionBased(lastKnownScrollPosition);
-                            ticking = false;
-                        });
-
-                        ticking = true;
+            /* THIS PORTION OF CODE IS ONLY EXECUTED WHEN THE USER THE LANGUAGE(CLIENT-SIDE) */
+            $(function () {
+                $('.language-switcher').on('click', '.dropdown-menu li', function (e) {
+                    e.preventDefault();
+                    var lang = $(this).data('lang');
+                    if (lang != null) {
+                        var res = lang.substr(0, 2);
+                        $('#selected_lang').html(res);
+                        $.cookie('Quick_lang', lang, { path: '/' });
+                        location.reload();
                     }
                 });
             });
         </script>
+
+        @yield('before_body_close')
     </body>
 </html>
