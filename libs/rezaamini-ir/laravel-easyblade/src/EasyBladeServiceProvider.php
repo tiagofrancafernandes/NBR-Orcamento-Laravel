@@ -21,10 +21,9 @@ use EasyBlade\Directives\{
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
-
 class EasyBladeServiceProvider extends ServiceProvider
 {
-    const DIRECTIVES = [
+    public const DIRECTIVES = [
         'route'            => RouteDirective::class,
         'url'              => UrlDirective::class,
         'asset'            => AssetDirective::class,

@@ -10,7 +10,7 @@ class isActiveDirective implements Directivable
 {
     public static function handle($parameter)
     {
-        return "<?php echo \\EasyBlade\\Directives\\isActiveDirective::render($parameter) ?>";
+        return "<?php echo \\EasyBlade\\Directives\\isActiveDirective::render({$parameter}) ?>";
     }
 
     public static function render($list, $type = 'active', $else = '')
@@ -21,5 +21,4 @@ class isActiveDirective implements Directivable
 
         return Str::is($list, Route::getCurrentRoute()->getName()) ? $type : $else;
     }
-
 }

@@ -8,6 +8,6 @@ class AssetDirective implements Directivable
 {
     public static function handle($parameter)
     {
-        return '<?php echo asset('.$parameter.') ?>';
+        return '<?php echo asset(' . $parameter . ') ?>';
     }
 }

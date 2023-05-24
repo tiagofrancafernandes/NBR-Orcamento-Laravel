@@ -26,10 +26,8 @@ class ComposicaoFactory extends Factory
                 \null, \null, \null, \null,
             ]),
 
-            'codigo_sinapi' => Sinapi::factory()->createOne(),
-            'descricao_sinapi' => \ucfirst(fake('pt_BR')->words(6, true)),
-            'codigo_nbr' => Nbr::factory()->createOne(),
-            'descricao_nbr' => \ucfirst(fake('pt_BR')->words(6, true)),
+            'codigo_sinapi' => Sinapi::select('codigo')->inRandomOrder()->first()?->codigo,
+            'codigo_nbr' => Nbr::select('codigo')->inRandomOrder()->first()?->codigo,
             'unidade_medida' => Arr::random([
                 'CM', 'UN',
                 'D', 'H',

@@ -10,18 +10,13 @@ return new class() extends Migration {
      */
     public function up(): void
     {
-        Schema::create('composicoes', function (Blueprint $table) {
+        Schema::create('insumos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('composicao_ref')->nullable();
+            $table->string('preco')->nullable();
+            $table->char('unidade_medida')->nullable();
             $table->string('codigo_sinapi')->index()->nullable();
             $table->string('codigo_nbr')->index()->nullable();
-            $table->char('unidade_medida')->nullable();
-            $table->char('valor_consolidado')->nullable();
-
             $table->timestamps();
-
-            $table->foreign('composicao_ref')->references('id')
-                ->on('composicoes')->onDelete('set null'); //cascade|set null
         });
     }
 
@@ -30,6 +25,6 @@ return new class() extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('composicoes');
+        Schema::dropIfExists('insumos');
     }
 };

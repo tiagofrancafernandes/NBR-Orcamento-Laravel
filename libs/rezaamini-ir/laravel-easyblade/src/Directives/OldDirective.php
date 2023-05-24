@@ -11,6 +11,7 @@ class OldDirective implements Directivable
         $array = explode(',', $parameter);
         $oldValue = trim($array[0]);
         $secondParam = trim(@$array[1]);
+
         if ($secondParam) {
             return "<?php echo old({$oldValue}, {$secondParam}) ?>";
         }

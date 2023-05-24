@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9b88d567a73c7340c14e2688ab119d6a",
+    "content-hash": "05547dc8d83cd4d02d5ea5b9917a3699",
     "packages": [
         {
             "name": "blade-ui-kit/blade-heroicons",
@@ -7732,16 +7732,16 @@
         },
         {
             "name": "laravel/pint",
-            "version": "v1.10.0",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/pint.git",
-                "reference": "c7a01fa9bdd79819e7a2f1ba63ac1b02e6692dbc"
+                "reference": "2ce317903c09ba5d6d06d26aa03ea1d9cc5d813f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pint/zipball/c7a01fa9bdd79819e7a2f1ba63ac1b02e6692dbc",
-                "reference": "c7a01fa9bdd79819e7a2f1ba63ac1b02e6692dbc",
+                "url": "https://api.github.com/repos/laravel/pint/zipball/2ce317903c09ba5d6d06d26aa03ea1d9cc5d813f",
+                "reference": "2ce317903c09ba5d6d06d26aa03ea1d9cc5d813f",
                 "shasum": ""
             },
             "require": {
@@ -7760,6 +7760,7 @@
                 "nunomaduro/termwind": "^1.15.1",
                 "pestphp/pest": "^2.4.0"
             },
+            "default-branch": true,
             "bin": [
                 "builds/pint"
             ],
@@ -7794,7 +7795,7 @@
                 "issues": "https://github.com/laravel/pint/issues",
                 "source": "https://github.com/laravel/pint"
             },
-            "time": "2023-04-25T14:52:30+00:00"
+            "time": "2023-04-25T14:54:53+00:00"
         },
         {
             "name": "laravel/sail",
@@ -10226,7 +10227,10 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "barryvdh/laravel-ide-helper": 20,
+        "laravel/pint": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

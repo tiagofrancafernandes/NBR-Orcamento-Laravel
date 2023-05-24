@@ -13,7 +13,6 @@ class ImageDirective implements Directivable
         $photo = trim($array[0]);
         $class = trim(@$array[1]) ?? null;
 
-        return "<img src='".asset($photo)."' class='$class'>";
+        return "<img src='" . asset($photo) . "' class='{$class}'>";
     }
-
 }

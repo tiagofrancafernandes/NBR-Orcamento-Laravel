@@ -28,7 +28,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     });
 });
 
-Route::get('/try/view', function (\Illuminate\Http\Request $request) {
+Route::get('/try/view', function (Illuminate\Http\Request $request) {
     $request->validate([
         'view' => 'required|string|min:1'
     ]);

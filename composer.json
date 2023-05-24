@@ -15,9 +15,9 @@
         "laravel/ui": "^4.2"
     },
     "require-dev": {
-        "barryvdh/laravel-ide-helper": "^2.13",
+        "barryvdh/laravel-ide-helper": "2.13.x-dev",
         "fakerphp/faker": "^1.9.1",
-        "laravel/pint": "^1.8",
+        "laravel/pint": "dev-main",
         "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",

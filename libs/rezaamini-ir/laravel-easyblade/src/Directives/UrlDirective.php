@@ -8,6 +8,6 @@ class UrlDirective implements Directivable
 {
     public static function handle($parameter)
     {
-        return '<?php echo url('.$parameter.') ?>';
+        return '<?php echo url(' . $parameter . ') ?>';
     }
 }
