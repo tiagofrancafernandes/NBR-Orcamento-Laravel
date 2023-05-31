@@ -32,6 +32,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Insumo wherePreco($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Insumo whereUnidadeMedida($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Insumo whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Composicao> $composicoes
+ * @property-read mixed $descricao_nbr
+ * @property-read mixed $descricao_sinapi
  * @mixin \Eloquent
  */
 class Insumo extends Model

@@ -4,27 +4,18 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ComposicaoController;
 use App\Http\Controllers\Admin\MainDashboardController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+Route::get('/', fn () => redirect()->route('filament.pages.dashboard'));
+Route::get('/home', fn () => redirect()->route('filament.pages.dashboard'));
 
-Route::get('/', fn () => redirect()->route('main_dashboard.index'));
-Route::get('/home', fn () => redirect()->route('main_dashboard.index'));
+// Auth::routes();
 
-Auth::routes();
+Route::prefix('old')->name('old.')->group(function () {
+    Route::prefix('admin')->middleware(['auth'])->group(function () {
+        Route::get('/', [MainDashboardController::class, 'index'])->name('main_dashboard.index');
 
-Route::prefix('admin')->middleware(['auth'])->group(function () {
-    Route::get('/', [MainDashboardController::class, 'index'])->name('main_dashboard.index');
-
-    Route::prefix('composicoes')->name('composicoes.')->group(function () {
-        Route::get('/', [ComposicaoController::class, 'index'])->name('index');
+        Route::prefix('composicoes')->name('composicoes.')->group(function () {
+            Route::get('/', [ComposicaoController::class, 'index'])->name('index');
+        });
     });
 });
 

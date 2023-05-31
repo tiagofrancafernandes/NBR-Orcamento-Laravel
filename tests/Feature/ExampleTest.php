@@ -15,6 +15,6 @@ class ExampleTest extends TestCase
         $response = $this->get('/');
 
         $response->assertStatus(302);
-        $response->assertRedirect(route('main_dashboard.index'));
+        $response->assertRedirect(route('filament.pages.dashboard'));
     }
 }

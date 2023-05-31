@@ -39,6 +39,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @method static \Illuminate\Database\Eloquent\Builder|Composicao whereUnidadeMedida($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Composicao whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Composicao whereValorConsolidado($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Insumo> $insumos
  * @mixin \Eloquent
  */
 class Composicao extends Model
