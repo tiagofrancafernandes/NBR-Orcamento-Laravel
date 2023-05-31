@@ -28,6 +28,7 @@
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "2.13.x-dev",
+        "doctrine/dbal": "^3.6",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "dev-main",
         "laravel/sail": "^1.18",
