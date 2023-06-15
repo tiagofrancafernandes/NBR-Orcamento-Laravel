@@ -23,6 +23,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @method static \Illuminate\Database\Eloquent\Builder|Sinapi whereDescricao($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sinapi whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sinapi whereUpdatedAt($value)
+ * @property string $custo
+ * @property int $unidade_medida
+ * @method static \Illuminate\Database\Eloquent\Builder|Sinapi whereCusto($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Sinapi whereUnidadeMedida($value)
  * @mixin \Eloquent
  */
 class Sinapi extends Model
@@ -34,6 +38,8 @@ class Sinapi extends Model
     protected $fillable = [
         'descricao',
         'codigo',
+        'custo',
+        'unidade_medida',
     ];
 
     /**

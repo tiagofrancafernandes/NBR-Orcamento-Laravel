@@ -40,6 +40,14 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @method static \Illuminate\Database\Eloquent\Builder|Composicao whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Composicao whereValorConsolidado($value)
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Insumo> $insumos
+ * @property string|null $descricao_curta
+ * @property string|null $descricao_longa
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Insumo> $insumos
+ * @method static \Illuminate\Database\Eloquent\Builder|Composicao whereDescricaoCurta($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Composicao whereDescricaoLonga($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Insumo> $insumos
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Insumo> $insumos
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Insumo> $insumos
  * @mixin \Eloquent
  */
 class Composicao extends Model
@@ -50,6 +58,8 @@ class Composicao extends Model
 
     protected $fillable = [
         'composicao_ref',
+        'descricao_curta',
+        'descricao_longa',
         'codigo_sinapi',
         'codigo_nbr',
         'unidade_medida',

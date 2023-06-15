@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\UnidadeMedidaEnum;
+use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,6 +21,8 @@ class SinapiFactory extends Factory
         return [
             'codigo' => \rand(100, 999) . date('ms'),
             'descricao' => fn ($att) => 'FAKE SINAPI - ' . ($att['codigo'] ?? ''),
+            'custo' => number_format(\rand(100, 999) . '.' . date('ms'), 2, '.', ''),
+            'unidade_medida' => Arr::random(UnidadeMedidaEnum::enums(true)),
         ];
     }
 }

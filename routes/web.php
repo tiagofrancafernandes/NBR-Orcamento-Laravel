@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ComposicaoController;
 use App\Http\Controllers\Admin\MainDashboardController;
 
 Route::get('/', fn () => redirect()->route('filament.pages.dashboard'));
+Route::get('/login', fn () => redirect()->route('filament.pages.dashboard'))->name('login');
 Route::get('/home', fn () => redirect()->route('filament.pages.dashboard'));
 
 // Auth::routes();

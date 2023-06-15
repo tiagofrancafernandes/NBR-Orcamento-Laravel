@@ -36,6 +36,8 @@ class ComposicaoFactory extends Factory
                 'mg',
             ]),
             'valor_consolidado' => sprintf('%d.%d', rand(10, 1500), rand(10, 99)),
+            'descricao_curta' => 'Descrição curta da composicao ' . \fake('pt_BR')->words(5, \true),
+            'descricao_longa' => \fake('pt_BR')->sentence(15),
         ];
     }
 }

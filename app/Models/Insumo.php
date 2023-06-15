@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  *
  * @property int $id
  * @property string|null $preco
- * @property string|null $unidade_medida
  * @property string|null $codigo_sinapi
  * @property string|null $codigo_nbr
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -35,6 +34,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Composicao> $composicoes
  * @property-read mixed $descricao_nbr
  * @property-read mixed $descricao_sinapi
+ * @property string|null $unidade_medida
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Composicao> $composicoes
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Composicao> $composicoes
+ * @property-read mixed $custo
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Composicao> $composicoes
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Composicao> $composicoes
  * @mixin \Eloquent
  */
 class Insumo extends Model
@@ -43,7 +48,6 @@ class Insumo extends Model
 
     protected $fillable = [
         'preco',
-        'unidade_medida',
         'codigo_sinapi',
         'codigo_nbr',
     ];
@@ -51,6 +55,8 @@ class Insumo extends Model
     protected $appends = [
         'descricaoSinapi',
         'descricaoNbr',
+        'custo',
+        'unidadeMedida',
     ];
 
     /**
@@ -99,5 +105,23 @@ class Insumo extends Model
         }
 
         return Nbr::getByCodigo($this?->codigo_nbr)?->descricao;
+    }
+
+    public function getCustoAttribute()
+    {
+        if (!$this?->codigo_sinapi) {
+            return null;
+        }
+
+        return Sinapi::getByCodigo($this?->codigo_sinapi)?->custo;
+    }
+
+    public function getUnidadeMedidaAttribute()
+    {
+        if (!$this?->codigo_sinapi) {
+            return null;
+        }
+
+        return Sinapi::getByCodigo($this?->codigo_sinapi)?->unidade_medida;
     }
 }

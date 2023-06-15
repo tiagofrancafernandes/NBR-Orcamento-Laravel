@@ -1,18 +1,22 @@
 import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
+import laravel, { refreshPaths } from 'laravel-vite-plugin';
 import path from 'path'
 
 export default defineConfig({
     plugins: [
         laravel({
             input: [
+                'resources/css/app.css',
                 'resources/sass/app.scss',
                 'resources/js/app.js',
 
                 'public/dashboard-assets/scripts.js',
                 'public/dashboard-assets/styles.scss',
             ],
-            refresh: true,
+            refresh: [
+                ...refreshPaths,
+                'app/Http/Livewire/**',
+            ],
         }),
     ],
     resolve: {

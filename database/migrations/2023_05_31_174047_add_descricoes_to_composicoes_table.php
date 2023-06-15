@@ -10,11 +10,9 @@ return new class() extends Migration {
      */
     public function up(): void
     {
-        Schema::create('insumos', function (Blueprint $table) {
-            $table->id();
-            $table->string('codigo_sinapi')->index()->nullable();
-            $table->string('codigo_nbr')->index()->nullable();
-            $table->timestamps();
+        Schema::table('composicoes', function (Blueprint $table) {
+            $table->string('descricao_curta')->nullable();
+            $table->longText('descricao_longa')->nullable();
         });
     }
 
@@ -23,6 +21,8 @@ return new class() extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('insumos');
+        Schema::table('composicoes', function (Blueprint $table) {
+            $table->dropColumn(['descricao_curta', 'descricao_longa']);
+        });
     }
 };

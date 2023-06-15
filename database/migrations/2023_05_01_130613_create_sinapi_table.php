@@ -12,9 +12,11 @@ return new class() extends Migration {
     {
         Schema::create('sinapi', function (Blueprint $table) {
             $table->id();
-            $table->string('descricao');
-            $table->string('codigo')->unique()->index();
             $table->timestamps();
+            $table->string('descricao', 300);
+            $table->string('codigo')->unique()->index();
+            $table->string('custo')->index();
+            $table->integer('unidade_medida')->index(); // UnidadeMedidaEnum::enums
         });
     }
 
