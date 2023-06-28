@@ -14,6 +14,7 @@ use App\Filament\Resources\SinapiResource\Pages;
 class SinapiResource extends Resource
 {
     protected static ?string $model = Sinapi::class;
+    protected static ?string $slug = 'sinapi';
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
@@ -21,13 +22,13 @@ class SinapiResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('descricao')
-                    ->required()
-                    ->maxLength(300),
-
                 Forms\Components\TextInput::make('codigo')
                     ->required()
                     ->maxLength(255),
+
+                Forms\Components\TextInput::make('descricao')
+                    ->required()
+                    ->maxLength(300),
 
                 Forms\Components\TextInput::make('custo')
                     ->required()
@@ -45,7 +46,7 @@ class SinapiResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('codigo')
-                    ->searchable()
+                    ->searchable(isIndividual: true)
                     ->icon('heroicon-o-clipboard')
                     ->iconPosition('before')
                     ->copyable()
@@ -55,12 +56,11 @@ class SinapiResource extends Resource
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('descricao')
-                    ->searchable()
+                    ->searchable(isIndividual: true)
                     ->tooltip(fn ($record) => $record->descricao)
                     ->toggleable()
                     ->toggledHiddenByDefault(false)
-                    ->size('sm')
-                    ->limit(100),
+                    ->limit(40),
 
                 Tables\Columns\TextColumn::make('custo'),
 
@@ -82,10 +82,10 @@ class SinapiResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                // Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                // Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 

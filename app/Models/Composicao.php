@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
@@ -66,8 +67,23 @@ class Composicao extends Model
         'valor_consolidado',
     ];
 
+    protected $appends = [
+        'temComposicaoRef',
+        'composicoesFilhasCount',
+    ];
+
     /**
-     * Get the composicaoRef that owns the Composicao
+     * Get the composicoesFilhas that owns the Composicao
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function composicoesFilhas(): HasMany
+    {
+        return $this->hasMany(Composicao::class, 'composicao_ref', 'id');
+    }
+
+    /**
+     * Get the composicaoReferencia that owns the Composicao
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -77,7 +93,7 @@ class Composicao extends Model
     }
 
     /**
-     * Get the composicaoRef that owns the Composicao
+     * Get the sinapi that owns the Composicao
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -87,7 +103,7 @@ class Composicao extends Model
     }
 
     /**
-     * Get the composicaoRef that owns the Composicao
+     * Get the nbr that owns the Composicao
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -111,5 +127,15 @@ class Composicao extends Model
             'id',
             'insumo_id',
         );
+    }
+
+    public function getTemComposicaoRefAttribute()
+    {
+        return (bool) $this->composicao_ref;
+    }
+
+    public function getComposicoesFilhasCountAttribute()
+    {
+        return $this->composicoesFilhas()->count();
     }
 }

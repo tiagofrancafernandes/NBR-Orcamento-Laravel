@@ -22,13 +22,16 @@ class InsumoResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('preco')
+                    ->required()
                     ->maxLength(255),
 
                 Forms\Components\Select::make('unidade_medida')
+                    ->required()
                     ->searchable()
                     ->options(UnidadeMedidaEnum::enums(onlyIds: false, tranlate: true)),
 
                 Forms\Components\Select::make('codigo_sinapi')
+                    ->required()
                     ->label('general.form.codigo_sinapi')->translateLabel()
                     ->relationship('sinapi', 'descricao')
                     ->searchable(),
@@ -45,12 +48,23 @@ class InsumoResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('preco'),
-                Tables\Columns\TextColumn::make('unidade_medida'),
-                Tables\Columns\TextColumn::make('codigo_sinapi'),
-                Tables\Columns\TextColumn::make('codigo_nbr'),
+
+                Tables\Columns\TextColumn::make('unidade_medida')
+                    ->enum(UnidadeMedidaEnum::enums(onlyIds: false, tranlate: true)),
+
+                Tables\Columns\TextColumn::make('codigo_sinapi')
+                    ->searchable(isIndividual: true),
+
+                Tables\Columns\TextColumn::make('codigo_nbr')
+                    ->searchable(isIndividual: true),
+
                 Tables\Columns\TextColumn::make('created_at')
+                    ->toggleable()
+                    ->toggledHiddenByDefault()
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->toggleable()
+                    ->toggledHiddenByDefault()
                     ->dateTime(),
             ])
             ->filters([

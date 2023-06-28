@@ -9,6 +9,9 @@ use Filament\Resources\Form;
 use Filament\Resources\Table;
 use App\Enums\UnidadeMedidaEnum;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Fieldset;
+use Illuminate\Database\Eloquent\Model;
 use App\Filament\Resources\ComposicaoResource\Pages;
 
 class ComposicaoResource extends Resource
@@ -16,32 +19,52 @@ class ComposicaoResource extends Resource
     protected static ?string $model = Composicao::class;
     protected static ?string $navigationIcon = 'heroicon-o-collection';
     protected static ?string $pluralModelLabel = 'composicoes';
+    protected static ?string $slug = 'composicoes';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                // Forms\Components\TextInput::make('composicao_ref')
-                Forms\Components\Select::make('composicao_ref')
-                    ->relationship('composicaoReferencia', 'descricao_curta')
-                    ->searchable(),
+                Fieldset::make('composicao_referencia')
+                    ->label('Composição referência')
+                ->schema([
+                    Forms\Components\Toggle::make('temComposicaoRef')
+                        ->default(true)
+                        // ->mutateDehydratedStateUsing(fn() => true)
+                        // ->dehydrated(false)
+                        ->reactive(),
 
-                Forms\Components\Select::make('codigo_sinapi')
-                    ->label('general.form.codigo_sinapi')->translateLabel()
-                    ->relationship('sinapi', 'descricao')
-                    ->searchable(),
+                    Forms\Components\Select::make('composicaoReferencia')
+                        ->hidden(fn (callable $get) => !$get('temComposicaoRef'))
+                        ->relationship('composicaoReferencia', 'descricao_curta')
+                        ->columnSpanFull()
+                        ->searchable(),
+                ]),
 
-                Forms\Components\Select::make('codigo_nbr')
-                    ->label('general.form.codigo_nbr')->translateLabel()
-                    ->relationship('nbr', 'descricao')
-                    ->searchable(),
+                Grid::make(2)
+                ->schema([
+                    Forms\Components\Select::make('codigo_sinapi')
+                        ->required()
+                        ->label('general.form.codigo_sinapi')->translateLabel()
+                        ->relationship('sinapi', 'descricao')
+                        ->searchable(),
 
-                Forms\Components\Select::make('unidade_medida')
-                    ->searchable()
-                    ->options(UnidadeMedidaEnum::enums(onlyIds: false, tranlate: true)),
+                    Forms\Components\Select::make('codigo_nbr')
+                        ->required()
+                        ->label('general.form.codigo_nbr')->translateLabel()
+                        ->relationship('nbr', 'descricao')
+                        ->searchable(),
 
-                Forms\Components\TextInput::make('valor_consolidado')
-                    ->maxLength(255),
+                    Forms\Components\TextInput::make('descricao_curta')
+                        ->columnSpanFull(),
+
+                    Forms\Components\Select::make('unidade_medida')
+                        ->required()
+                        ->searchable()
+                        ->options(UnidadeMedidaEnum::enums(onlyIds: false, tranlate: true)),
+                ]),
+
+                Forms\Components\Hidden::make('valor_consolidado'),
             ]);
     }
 
@@ -49,15 +72,48 @@ class ComposicaoResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('composicao_ref'),
-                Tables\Columns\TextColumn::make('codigo_sinapi'),
-                Tables\Columns\TextColumn::make('codigo_nbr'),
-                Tables\Columns\TextColumn::make('unidade_medida'),
-                Tables\Columns\TextColumn::make('valor_consolidado'),
+                Tables\Columns\TextColumn::make('id')
+                    ->searchable(isIndividual: true),
+
+                Tables\Columns\TextColumn::make('codigo_sinapi')
+                    ->sortable()
+                    ->searchable(isIndividual: true),
+
+                Tables\Columns\TextColumn::make('codigo_nbr')
+                    ->sortable()
+                    ->searchable(isIndividual: true),
+
+                Tables\Columns\TextColumn::make('descricao_curta')
+                    ->searchable(isIndividual: true)
+                    ->limit(40)
+                    ->tooltip(fn (?Model $record) => $record?->descricao_curta),
+
+                Tables\Columns\TextColumn::make('unidade_medida')
+                    ->enum(UnidadeMedidaEnum::enums(onlyIds: false, tranlate: true)),
+
+                Tables\Columns\TextColumn::make('composicaoReferencia.descricao_curta')
+                    ->label('Desc. da comp. ref')
+                    ->limit(25)
+                    ->tooltip(fn (?Model $record) => $record?->descricao_curta)
+                    ->searchable(isIndividual: true),
+
+                Tables\Columns\TextColumn::make('composicoesFilhasCount')
+                    ->label('Composicoes filhas')
+                    ->toggleable()
+                    ->toggledHiddenByDefault(),
+
+                Tables\Columns\TextColumn::make('valor_consolidado')
+                    ->toggleable()
+                    ->toggledHiddenByDefault(),
+
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
+                    ->dateTime()
+                    ->toggleable()
+                    ->toggledHiddenByDefault(),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                    ->dateTime()
+                    ->toggleable()
+                    ->toggledHiddenByDefault(),
             ])
             ->filters([
                 //

@@ -13,7 +13,7 @@ use Filament\Tables;
 class NbrResource extends Resource
 {
     protected static ?string $model = Nbr::class;
-
+    protected static ?string $slug = 'nbr';
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     public static function form(Form $form): Form
@@ -33,22 +33,22 @@ class NbrResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('descricao'),
-                Tables\Columns\TextColumn::make('codigo'),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                Tables\Columns\TextColumn::make('descricao')
+                    ->searchable(isIndividual: true),
+                Tables\Columns\TextColumn::make('codigo')
+                    ->sortable()
+                    ->searchable(isIndividual: true),
             ])
             ->filters([
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                // Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                // Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 
