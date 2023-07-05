@@ -18,7 +18,6 @@ class ComposicaoResource extends Resource
 {
     protected static ?string $model = Composicao::class;
     protected static ?string $navigationIcon = 'heroicon-o-collection';
-    protected static ?string $pluralModelLabel = 'composicoes';
     protected static ?string $slug = 'composicoes';
 
     public static function form(Form $form): Form
@@ -142,8 +141,18 @@ class ComposicaoResource extends Resource
         ];
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('general.composicoes.label_singular');
+    }
+
     public static function getPluralModelLabel(): string
     {
-        return __('filament/resources/general.composicoes');
+        return __('general.composicoes.label_plural');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('general.composicoes.label_plural');
     }
 }

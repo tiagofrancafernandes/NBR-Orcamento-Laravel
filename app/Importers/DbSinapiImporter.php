@@ -2,9 +2,11 @@
 
 namespace App\Importers;
 
-use App\Enums\UnidadeMedidaEnum;
-use App\Models\Sinapi;
 use Exception;
+use App\Models\Nbr;
+use App\Models\Sinapi;
+use App\Models\SinapiHasNbr;
+use App\Enums\UnidadeMedidaEnum;
 use Spatie\SimpleExcel\SimpleExcelReader;
 
 class DbSinapiImporter
@@ -40,23 +42,74 @@ class DbSinapiImporter
         \dump('Started at', \now()->format('Y-m-d H:i:s'));
         \dump(\sprintf('Sinapi count: %s', Sinapi::count()));
 
-        $rows->each(function (array $rowProperties) {
-            $rowProperties = (object) $rowProperties;
-            $unidadeMedida = UnidadeMedidaEnum::getEnum(\strtolower($rowProperties->unidade_medida))
-                ?: UnidadeMedidaEnum::getEnum($rowProperties->unidade_medida);
-
-            if (!$unidadeMedida) {
-                throw new \InvalidArgumentException('unidadeMedida is invalid ');
+        $clearKeyValue = function (array &$array) {
+            foreach ($array as $key => $value) {
+                $array[trim("{$key}")] = trim("{$value}");
             }
 
-            Sinapi::updateOrCreate([
-                'codigo' => $rowProperties->codigo_sinapi,
+            // return $array;
+        };
+
+        $rows->each(function (array $rowProperties) use ($clearKeyValue) {
+            $clearKeyValue($rowProperties);
+            $rowProperties = (object) $rowProperties;
+            $unidadeMedida = UnidadeMedidaEnum::getEnum(\strtolower($rowProperties?->unidade_medida))
+                ?: (UnidadeMedidaEnum::getEnum($rowProperties?->unidade_medida) ?? UnidadeMedidaEnum::OTHER);
+
+            if (!$unidadeMedida) {
+                throw new \InvalidArgumentException("unidadeMedida [{$unidadeMedida}|{$rowProperties?->unidade_medida}] is invalid");
+            }
+
+            $descricaoNbr = $rowProperties?->descricao_nbr;
+            $codigoNbr = $rowProperties?->codigo_nbr;
+
+            $nbrs = [];
+
+            if ($descricaoNbr && $codigoNbr) {
+                $descricaoNbr = str($rowProperties?->descricao_nbr ?? '')->trim()->explode("\n")->each(fn ($item) => trim($item));
+                $codigoNbr = str($rowProperties?->codigo_nbr ?? '')->trim()->explode("\n")->each(fn ($item) => trim($item));
+                $combinedNbr = $descricaoNbr->count() === $codigoNbr->count() ? array_combine(
+                    $descricaoNbr->toArray(),
+                    $codigoNbr->toArray(),
+                ) : [];
+
+                if ($combinedNbr) {
+                    foreach ($combinedNbr as $_descricaoNbr => $_codigoNbr) {
+                        $nbr = Nbr::updateOrCreate([
+                            'codigo' => $_codigoNbr,
+                        ], [
+                            'descricao' => str($_descricaoNbr)->limit(200),
+                            'codigo' => $_codigoNbr,
+                        ]);
+
+                        $nbrs[] = $nbr;
+                    }
+                }
+            }
+
+            $sinapi = Sinapi::updateOrCreate([
+                'codigo' => $rowProperties->codigo,
             ], [
-                'descricao' => $rowProperties->descricao_sinapi,
-                'codigo' => $rowProperties->codigo_sinapi,
+                'descricao' => str($rowProperties->descricao)->limit(200),
+                'codigo' => $rowProperties->codigo,
                 'custo' => $rowProperties->custo,
                 'unidade_medida' => $unidadeMedida,
             ]);
+
+            if ($nbrs) {
+                foreach ($nbrs as $_nbr) {
+                    $sinapiHasNbr = SinapiHasNbr::updateOrCreate([
+                        'codigo_sinapi' => $sinapi?->codigo,
+                        'codigo_nbr' => $_nbr?->codigo,
+                    ], [
+                        'codigo_sinapi' => $sinapi?->codigo,
+                        'codigo_nbr' => $_nbr?->codigo,
+                        'descricao' => implode('|', [
+                            "{$_nbr?->codigo} - {$sinapi?->codigo}",
+                        ]),
+                    ]);
+                }
+            }
         });
 
         \dump('Finished at', \now()->format('Y-m-d H:i:s'));

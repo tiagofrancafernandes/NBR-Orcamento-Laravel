@@ -25,19 +25,19 @@ class InsumoResource extends Resource
                     ->required()
                     ->maxLength(255),
 
-                Forms\Components\Select::make('unidade_medida')
-                    ->required()
-                    ->searchable()
+                Forms\Components\Select::make('unidadeMedida')
+                    ->dehydrated(false)
+                    ->disabled()
                     ->options(UnidadeMedidaEnum::enums(onlyIds: false, tranlate: true)),
 
                 Forms\Components\Select::make('codigo_sinapi')
                     ->required()
-                    ->label('general.form.codigo_sinapi')->translateLabel()
+                    ->label(__('general.form.codigo_sinapi'))
                     ->relationship('sinapi', 'descricao')
                     ->searchable(),
 
                 Forms\Components\Select::make('codigo_nbr')
-                    ->label('general.form.codigo_nbr')->translateLabel()
+                    ->label(__('general.form.codigo_nbr'))
                     ->relationship('nbr', 'descricao')
                     ->searchable(),
             ]);
@@ -48,6 +48,10 @@ class InsumoResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('preco'),
+
+                Tables\Columns\TextColumn::make('sinapi.descricao')
+                    ->label(__('general.insumos.table.descricao_sinapi'))
+                    ->searchable(isIndividual: true),
 
                 Tables\Columns\TextColumn::make('unidade_medida')
                     ->enum(UnidadeMedidaEnum::enums(onlyIds: false, tranlate: true)),
