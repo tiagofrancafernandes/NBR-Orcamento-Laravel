@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 /**
  * App\Models\Sinapi
@@ -58,6 +59,23 @@ class Sinapi extends Model
             "sinapi-by-codigo-{$codigo}",
             (24 * 60 * 60) /*secs*/,
             fn () => Sinapi::whereCodigo(trim($codigo))->first()
+        );
+    }
+
+    /**
+     * Get all of the nbrGroup for the SinapiHasNbr
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function nbrGroup(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            Nbr::class,
+            SinapiHasNbr::class,
+            'codigo_sinapi',
+            'codigo', // Nbr
+            'codigo', // Sinapi
+            'codigo_nbr',
         );
     }
 }

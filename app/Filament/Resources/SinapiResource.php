@@ -10,6 +10,7 @@ use Filament\Resources\Table;
 use App\Enums\UnidadeMedidaEnum;
 use Filament\Resources\Resource;
 use App\Filament\Resources\SinapiResource\Pages;
+use App\Models\Nbr;
 
 class SinapiResource extends Resource
 {
@@ -38,6 +39,12 @@ class SinapiResource extends Resource
                     ->searchable()
                     ->options(UnidadeMedidaEnum::enums(onlyIds: false, tranlate: true))
                     ->required(),
+
+                \Filament\Forms\Components\MorphToSelect::make('nbrGroup')
+                    ->types([
+                        \Filament\Forms\Components\MorphToSelect\Type::make(Sinapi::class)->titleColumnName('Sinapi'),
+                        \Filament\Forms\Components\MorphToSelect\Type::make(Nbr::class)->titleColumnName('Nbr'),
+                    ]),
             ]);
     }
 

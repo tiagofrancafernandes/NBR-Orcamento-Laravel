@@ -42,7 +42,7 @@ class DbSinapiImporter
         \dump('Started at', \now()->format('Y-m-d H:i:s'));
         \dump(\sprintf('Sinapi count: %s', Sinapi::count()));
 
-        $clearKeyValue = function (array &$array) {
+        $clearedKeyValue = function (array &$array) {
             foreach ($array as $key => $value) {
                 $array[trim("{$key}")] = trim("{$value}");
             }
@@ -50,8 +50,8 @@ class DbSinapiImporter
             // return $array;
         };
 
-        $rows->each(function (array $rowProperties) use ($clearKeyValue) {
-            $clearKeyValue($rowProperties);
+        $rows->each(function (array $rowProperties) use ($clearedKeyValue) {
+            $clearedKeyValue($rowProperties);
             $rowProperties = (object) $rowProperties;
             $unidadeMedida = UnidadeMedidaEnum::getEnum(\strtolower($rowProperties?->unidade_medida))
                 ?: (UnidadeMedidaEnum::getEnum($rowProperties?->unidade_medida) ?? UnidadeMedidaEnum::OTHER);
