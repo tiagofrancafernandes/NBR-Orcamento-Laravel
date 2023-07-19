@@ -17,7 +17,6 @@ use App\Filament\Resources\ComposicaoResource\Pages;
 class ComposicaoResource extends Resource
 {
     protected static ?string $model = Composicao::class;
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
     protected static ?string $slug = 'composicoes';
 
     public static function form(Form $form): Form
@@ -26,42 +25,42 @@ class ComposicaoResource extends Resource
             ->schema([
                 Fieldset::make('composicao_referencia')
                     ->label('Composição referência')
-                ->schema([
-                    Forms\Components\Toggle::make('temComposicaoRef')
-                        ->default(true)
-                        // ->mutateDehydratedStateUsing(fn() => true)
-                        // ->dehydrated(false)
-                        ->reactive(),
+                    ->schema([
+                        Forms\Components\Toggle::make('temComposicaoRef')
+                            ->default(true)
+                            // ->mutateDehydratedStateUsing(fn() => true)
+                            // ->dehydrated(false)
+                            ->reactive(),
 
-                    Forms\Components\Select::make('composicaoReferencia')
-                        ->hidden(fn (callable $get) => !$get('temComposicaoRef'))
-                        ->relationship('composicaoReferencia', 'descricao_curta')
-                        ->columnSpanFull()
-                        ->searchable(),
-                ]),
+                        Forms\Components\Select::make('composicaoReferencia')
+                            ->hidden(fn (callable $get) => !$get('temComposicaoRef'))
+                            ->relationship('composicaoReferencia', 'descricao_curta')
+                            ->columnSpanFull()
+                            ->searchable(),
+                    ]),
 
                 Grid::make(2)
-                ->schema([
-                    Forms\Components\Select::make('codigo_sinapi')
-                        ->required()
-                        ->label('general.form.codigo_sinapi')->translateLabel()
-                        ->relationship('sinapi', 'descricao')
-                        ->searchable(),
+                    ->schema([
+                        Forms\Components\Select::make('codigo_sinapi')
+                            ->required()
+                            ->label('general.form.codigo_sinapi')->translateLabel()
+                            ->relationship('sinapi', 'descricao')
+                            ->searchable(),
 
-                    Forms\Components\Select::make('codigo_nbr')
-                        ->required()
-                        ->label('general.form.codigo_nbr')->translateLabel()
-                        ->relationship('nbr', 'descricao')
-                        ->searchable(),
+                        Forms\Components\Select::make('codigo_nbr')
+                            ->required()
+                            ->label('general.form.codigo_nbr')->translateLabel()
+                            ->relationship('nbr', 'descricao')
+                            ->searchable(),
 
-                    Forms\Components\TextInput::make('descricao_curta')
-                        ->columnSpanFull(),
+                        Forms\Components\TextInput::make('descricao_curta')
+                            ->columnSpanFull(),
 
-                    Forms\Components\Select::make('unidade_medida')
-                        ->required()
-                        ->searchable()
-                        ->options(UnidadeMedidaEnum::enums(onlyIds: false, tranlate: true)),
-                ]),
+                        Forms\Components\Select::make('unidade_medida')
+                            ->required()
+                            ->searchable()
+                            ->options(UnidadeMedidaEnum::enums(onlyIds: false, tranlate: true)),
+                    ]),
 
                 Forms\Components\Hidden::make('valor_consolidado'),
             ]);
@@ -154,5 +153,15 @@ class ComposicaoResource extends Resource
     public static function getNavigationLabel(): string
     {
         return __('general.composicoes.label_plural');
+    }
+
+    protected static function getNavigationIcon(): string
+    {
+        return 'heroicon-s-puzzle';
+    }
+
+    protected static function getNavigationGroup(): ?string
+    {
+        return __('general.groups.composicoes');
     }
 }

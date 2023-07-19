@@ -5,7 +5,6 @@ namespace App\Importers;
 use Exception;
 use App\Models\Nbr;
 use App\Models\Sinapi;
-use App\Models\SinapiHasNbr;
 use App\Enums\UnidadeMedidaEnum;
 use Spatie\SimpleExcel\SimpleExcelReader;
 
@@ -98,16 +97,19 @@ class DbSinapiImporter
 
             if ($nbrs) {
                 foreach ($nbrs as $_nbr) {
-                    $sinapiHasNbr = SinapiHasNbr::updateOrCreate([
-                        'codigo_sinapi' => $sinapi?->codigo,
-                        'codigo_nbr' => $_nbr?->codigo,
-                    ], [
-                        'codigo_sinapi' => $sinapi?->codigo,
-                        'codigo_nbr' => $_nbr?->codigo,
-                        'descricao' => implode('|', [
-                            "{$_nbr?->codigo} - {$sinapi?->codigo}",
-                        ]),
-                    ]);
+                    // TODO usar mophy to many aqui
+                    dd('TODO usar mophy to many aqui'); // TODO
+
+                    // $sinapiHasNbr = SinapiHasNbr::updateOrCreate([
+                    //     'codigo_sinapi' => $sinapi?->codigo,
+                    //     'codigo_nbr' => $_nbr?->codigo,
+                    // ], [
+                    //     'codigo_sinapi' => $sinapi?->codigo,
+                    //     'codigo_nbr' => $_nbr?->codigo,
+                    //     'descricao' => implode('|', [
+                    //         "{$_nbr?->codigo} - {$sinapi?->codigo}",
+                    //     ]),
+                    // ]);
                 }
             }
         });

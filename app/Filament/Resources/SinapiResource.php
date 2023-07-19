@@ -40,11 +40,11 @@ class SinapiResource extends Resource
                     ->options(UnidadeMedidaEnum::enums(onlyIds: false, tranlate: true))
                     ->required(),
 
-                \Filament\Forms\Components\MorphToSelect::make('nbrGroup')
-                    ->types([
-                        \Filament\Forms\Components\MorphToSelect\Type::make(Sinapi::class)->titleColumnName('Sinapi'),
-                        \Filament\Forms\Components\MorphToSelect\Type::make(Nbr::class)->titleColumnName('Nbr'),
-                    ]),
+                // \Filament\Forms\Components\MorphToSelect::make('nbrGroup')
+                //     ->types([
+                //         \Filament\Forms\Components\MorphToSelect\Type::make(Sinapi::class)->titleColumnName('Sinapi'),
+                //         \Filament\Forms\Components\MorphToSelect\Type::make(Nbr::class)->titleColumnName('Nbr'),
+                //     ]),
             ]);
     }
 
@@ -103,8 +103,35 @@ class SinapiResource extends Resource
         ];
     }
 
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('general.sinapi.label_singular');
+    }
+
     public static function getPluralModelLabel(): string
     {
-        return 'Sinapi';
+        return __('general.sinapi.label_plural');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('general.sinapi.label_plural');
+    }
+
+    protected static function getNavigationIcon(): string
+    {
+        return 'heroicon-s-tag';
+    }
+
+    protected static function getNavigationGroup(): ?string
+    {
+        return __('general.groups.tabelas');
     }
 }

@@ -97,4 +97,29 @@ class InsumoResource extends Resource
             'edit' => Pages\EditInsumo::route('/{record}/edit'),
         ];
     }
+
+    public static function getModelLabel(): string
+    {
+        return __('general.insumos.label_singular');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('general.insumos.label_plural');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('general.insumos.label_plural');
+    }
+
+    protected static function getNavigationIcon(): string
+    {
+        return 'heroicon-s-cube';
+    }
+
+    protected static function getNavigationGroup(): ?string
+    {
+        return __('general.groups.insumos');
+    }
 }

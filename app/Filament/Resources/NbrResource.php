@@ -59,8 +59,28 @@ class NbrResource extends Resource
         ];
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('general.nbr.label_singular');
+    }
+
     public static function getPluralModelLabel(): string
     {
-        return 'Nbr';
+        return __('general.nbr.label_plural');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('general.nbr.label_plural');
+    }
+
+    protected static function getNavigationIcon(): string
+    {
+        return 'heroicon-s-tag';
+    }
+
+    protected static function getNavigationGroup(): ?string
+    {
+        return __('general.groups.tabelas');
     }
 }
