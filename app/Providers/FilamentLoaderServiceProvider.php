@@ -47,6 +47,11 @@ class FilamentLoaderServiceProvider extends ServiceProvider
                     ->label(__('general.groups.tabelas'))
                     // ->icon('heroicon-s-cube')
                     ->collapsed(),
+
+                NavigationGroup::make()
+                    ->label(__('general.groups.access'))
+                    // ->icon('heroicon-s-cube')
+                    ->collapsed(),
             ]);
         });
     }

@@ -37,5 +37,16 @@ return [
         'composicoes' => 'Composições',
         'insumos' => 'Insumos',
         'tabelas' => 'Tabelas',
+        'access' => 'Acesso',
+    ],
+
+    'users' => [
+        'label_singular' => 'Usuário',
+        'label_plural' => 'Usuários',
+    ],
+
+    'roles' => [
+        'label_singular' => 'Papel',
+        'label_plural' => 'Papéis',
     ],
 ];
