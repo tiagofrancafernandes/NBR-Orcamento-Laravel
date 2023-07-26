@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\NbrResource\RelationManagers;
+namespace App\Filament\Resources\SinapiResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Tables;
@@ -9,9 +9,9 @@ use Filament\Resources\Table;
 use App\Enums\UnidadeMedidaEnum;
 use Filament\Resources\RelationManagers\RelationManager;
 
-class SinapiRelationManager extends RelationManager
+class NbrRelationManager extends RelationManager
 {
-    protected static string $relationship = 'sinapiRelacionadas';
+    protected static string $relationship = 'nbrRelacionadas';
 
     protected static ?string $recordTitleAttribute = 'descricao';
 
@@ -55,7 +55,6 @@ class SinapiRelationManager extends RelationManager
                     ->dateTime()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
-
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
                     ->toggleable()
@@ -67,7 +66,7 @@ class SinapiRelationManager extends RelationManager
             ->headerActions([
                 // Tables\Actions\CreateAction::make(),
                 Tables\Actions\AttachAction::make()
-                    ->inverseRelationshipName('nbrRelacionadas'),
+                    ->inverseRelationshipName('sinapiRelacionadas'),
             ])
             ->actions([
                 // Tables\Actions\EditAction::make(),

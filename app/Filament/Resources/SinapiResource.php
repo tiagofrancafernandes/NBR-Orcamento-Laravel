@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Models\Nbr;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Sinapi;
@@ -9,8 +10,10 @@ use Filament\Resources\Form;
 use Filament\Resources\Table;
 use App\Enums\UnidadeMedidaEnum;
 use Filament\Resources\Resource;
+use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\SinapiResource\Pages;
-use App\Models\Nbr;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use App\Filament\Resources\SinapiResource\RelationManagers\NbrRelationManager;
 
 class SinapiResource extends Resource
 {
@@ -74,6 +77,18 @@ class SinapiResource extends Resource
                 Tables\Columns\TextColumn::make('unidade_medida')
                     ->enum(UnidadeMedidaEnum::enums(onlyIds: false, tranlate: true)),
 
+                Tables\Columns\TextColumn::make('nbrRelacionadasAsString')
+                    ->label('NBR Relacionadas')
+                    ->extraAttributes(function ($record) {
+                        return [
+                            'x-data' => '{}',
+                            'x-tooltip.raw' => str_replace(', ', ' | ' . PHP_EOL, $record->nbrRelacionadasAsString),
+                        ];
+                    }, true)
+                    ->toggleable()
+                    ->toggledHiddenByDefault(false)
+                    ->limit(30),
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->toggleable()
@@ -99,14 +114,16 @@ class SinapiResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageSinapis::route('/'),
+            'index' => Pages\ListSinapis::route('/'),
+            'create' => Pages\CreateSinapi::route('/create'),
+            'edit' => Pages\EditSinapi::route('/{record}/edit'),
         ];
     }
 
     public static function getRelations(): array
     {
         return [
-            //
+            NbrRelationManager::class,
         ];
     }
 
@@ -133,5 +150,13 @@ class SinapiResource extends Resource
     protected static function getNavigationGroup(): ?string
     {
         return __('general.groups.tabelas');
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return static::getModel()::query()
+            ->with([
+                // 'nbrRelacionadas' => fn (BelongsToMany $query) => $query->select('descricao', 'codigo'),
+            ]);
     }
 }

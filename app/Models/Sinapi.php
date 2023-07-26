@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * App\Models\Sinapi
@@ -58,6 +59,32 @@ class Sinapi extends Model
             "sinapi-by-codigo-{$codigo}",
             (24 * 60 * 60) /*secs*/,
             fn () => Sinapi::whereCodigo(trim($codigo))->first()
+        );
+    }
+
+    /**
+     * The nbrRelacionadas that belong to the user.
+     */
+    public function nbrRelacionadas(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Nbr::class,
+            'nbr_sinapi',
+            'sinapi_codigo',
+            'nbr_codigo',
+            'codigo',
+            'codigo',
+        );
+    }
+
+    public function getNbrRelacionadasAsStringAttribute()
+    {
+        $cacheKey = implode('-', [__FUNCTION__, $this->codigo]);
+
+        return Cache::remember(
+            $cacheKey,
+            300 /*secs*/,
+            fn () => $this?->nbrRelacionadas()?->select('descricao', 'codigo')->pluck('codigo')?->implode(', ')
         );
     }
 }
