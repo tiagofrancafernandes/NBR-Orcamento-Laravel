@@ -4,9 +4,9 @@ namespace App\Filament\Resources\NbrResource\Pages;
 
 use App\Filament\Resources\NbrResource;
 use Filament\Pages\Actions;
-use Filament\Resources\Pages\ManageRecords;
+use Filament\Resources\Pages\ListRecords;
 
-class ManageNbrs extends ManageRecords
+class ListNbrs extends ListRecords
 {
     protected static string $resource = NbrResource::class;
 

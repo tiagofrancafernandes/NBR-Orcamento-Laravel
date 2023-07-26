@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\NbrResource\Pages;
+use App\Filament\Resources\NbrResource\RelationManagers\SinapiRelationManager;
 use App\Models\Nbr;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -55,7 +56,9 @@ class NbrResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageNbrs::route('/'),
+            'index' => Pages\ListNbrs::route('/'),
+            'create' => Pages\CreateNbr::route('/create'),
+            'edit' => Pages\EditNbr::route('/{record}/edit'),
         ];
     }
 
@@ -82,5 +85,12 @@ class NbrResource extends Resource
     protected static function getNavigationGroup(): ?string
     {
         return __('general.groups.tabelas');
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            SinapiRelationManager::class,
+        ];
     }
 }
