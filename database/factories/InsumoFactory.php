@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Nbr;
+use App\Models\Sinapi;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,14 @@ class InsumoFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'codigo_sinapi' => Sinapi::select('codigo')->inRandomOrder()->first()?->codigo ?? null,
+            'codigo_nbr' => Nbr::select('codigo')->inRandomOrder()->first()?->codigo ?? null,
+            'preco' => number_format(
+                rand(110, 10000) . '.' . rand(00, 99),
+                2,
+                '.',
+                ''
+            ),
         ];
     }
 }
