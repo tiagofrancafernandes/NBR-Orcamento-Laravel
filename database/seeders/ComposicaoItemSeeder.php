@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Composicao;
 use App\Models\ComposicaoItem;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,12 @@ class ComposicaoItemSeeder extends Seeder
      */
     public function run(): void
     {
-        ComposicaoItem::factory(15)->create();
+        ComposicaoItem::factory(8)->create();
+        ComposicaoItem::factory()->createOne([
+            'item_type' => Composicao::class,
+            'item_id' => Composicao::factory(),
+            'is_a_composicao' => true,
+        ]);
+        ComposicaoItem::factory(10)->create();
     }
 }

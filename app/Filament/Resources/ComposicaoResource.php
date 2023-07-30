@@ -13,6 +13,7 @@ use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Fieldset;
 use Illuminate\Database\Eloquent\Model;
 use App\Filament\Resources\ComposicaoResource\Pages;
+use App\Filament\Resources\ComposicaoResource\RelationManagers\ItemsRelationManager;
 
 class ComposicaoResource extends Resource
 {
@@ -127,7 +128,7 @@ class ComposicaoResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            ItemsRelationManager::class,
         ];
     }
 

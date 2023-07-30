@@ -138,4 +138,14 @@ class Composicao extends Model
     {
         return $this->composicoesFilhas()->count();
     }
+
+    /**
+     * Get all of the items for the Composicao
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function items(): HasMany
+    {
+        return $this->hasMany(ComposicaoItem::class, 'composicao_id', 'id');
+    }
 }

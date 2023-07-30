@@ -66,6 +66,24 @@ class ComposicaoItem extends Model
      */
     public function getItemAttribute(): null|Model
     {
-        return $this->item()?->first() ?? null;
+        $itemType = $this->{'item_type'} ?? null;
+        $itemId = $this->{'item_id'} ?? null;
+        $itemIdColumn = $this->{'item_id_column'} ?? 'id';
+
+        if (!$itemType || !$itemId || !class_exists($itemType)) {
+            return null;
+        }
+
+        $cacheKey = md5(
+            implode('-', [
+                $itemType, $itemId, $itemIdColumn,
+            ])
+        );
+
+        return \Illuminate\Support\Facades\Cache::remember(
+            $cacheKey,
+            60 /*secs*/,
+            fn () => $this->item()?->first() ?? null
+        );
     }
 }
