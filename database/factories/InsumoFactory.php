@@ -21,12 +21,6 @@ class InsumoFactory extends Factory
         return [
             'codigo_sinapi' => Sinapi::select('codigo')->inRandomOrder()->first()?->codigo ?? null,
             'codigo_nbr' => Nbr::select('codigo')->inRandomOrder()->first()?->codigo ?? null,
-            'preco' => number_format(
-                rand(110, 10000) . '.' . rand(00, 99),
-                2,
-                '.',
-                ''
-            ),
         ];
     }
 }

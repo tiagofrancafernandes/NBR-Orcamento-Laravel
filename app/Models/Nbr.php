@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property string $codigo
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Sinapi> $sinapiRelacionadas
+ * @property-read int|null $sinapi_relacionadas_count
  * @method static \Database\Factories\NbrFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Nbr newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Nbr newQuery()
@@ -25,6 +27,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Nbr whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Nbr whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @mixin IdeHelperNbr
  */
 class Nbr extends Model
 {

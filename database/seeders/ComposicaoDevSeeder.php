@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Insumo;
 use App\Models\Composicao;
 use Illuminate\Database\Seeder;
-use App\Models\InsumoComposicao;
 use App\Models\Nbr;
 use App\Models\Sinapi;
 
@@ -37,7 +36,6 @@ class ComposicaoDevSeeder extends Seeder
         );
 
         $insumo = Insumo::create([
-            'preco' => '50.00',
             'unidade_medida' => 'Kg',
             'codigo_sinapi' => $sinapi->codigo,
             'codigo_nbr' => $nbr->codigo,
@@ -45,19 +43,20 @@ class ComposicaoDevSeeder extends Seeder
 
         $composicao = Composicao::create([]);
 
-        $insumoComposicao = InsumoComposicao::firstOrCreate(
-            [
-                'insumo_id' => $insumo->id,
-                'composicao_id' => $composicao->id,
-            ],
-            [
-                'insumo_id' => $insumo->id,
-                'composicao_id' => $composicao->id,
-                'coeficiente' => '0.5',
-            ]
-        );
+        // TODO: ComposicaoItem
+        // $insumoComposicao = \App\Models\InsumoComposicao::firstOrCreate(
+        //     [
+        //         'insumo_id' => $insumo->id,
+        //         'composicao_id' => $composicao->id,
+        //     ],
+        //     [
+        //         'insumo_id' => $insumo->id,
+        //         'composicao_id' => $composicao->id,
+        //         'coeficiente' => '0.5',
+        //     ]
+        // );
 
-        dump('insumoComposicao', $insumoComposicao->toArray());
+        // dump('insumoComposicao', $insumoComposicao->toArray());
         dump('insumo', $insumo->toArray());
     }
 }

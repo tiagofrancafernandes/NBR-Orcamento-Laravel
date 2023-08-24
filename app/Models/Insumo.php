@@ -11,13 +11,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * App\Models\Insumo
  *
  * @property int $id
- * @property string|null $preco
  * @property string|null $codigo_sinapi
  * @property string|null $codigo_nbr
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $preco
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Composicao> $composicoes
  * @property-read int|null $composicoes_count
+ * @property-read mixed $custo
+ * @property-read mixed $descricao_nbr
+ * @property-read mixed $descricao_sinapi
+ * @property-read mixed $unidade_medida
  * @property-read \App\Models\Nbr|null $nbr
  * @property-read \App\Models\Sinapi|null $sinapi
  * @method static \Database\Factories\InsumoFactory factory($count = null, $state = [])
@@ -29,25 +33,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Insumo whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Insumo whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Insumo wherePreco($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Insumo whereUnidadeMedida($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Insumo whereUpdatedAt($value)
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Composicao> $composicoes
- * @property-read mixed $descricao_nbr
- * @property-read mixed $descricao_sinapi
- * @property string|null $unidade_medida
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Composicao> $composicoes
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Composicao> $composicoes
- * @property-read mixed $custo
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Composicao> $composicoes
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Composicao> $composicoes
  * @mixin \Eloquent
+ * @mixin IdeHelperInsumo
  */
 class Insumo extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'preco',
         'codigo_sinapi',
         'codigo_nbr',
     ];
@@ -113,7 +107,9 @@ class Insumo extends Model
             return null;
         }
 
-        return Sinapi::getByCodigo($this?->codigo_sinapi)?->custo;
+        $custo = Sinapi::getByCodigo($this?->codigo_sinapi)?->custo;
+
+        return $custo ? str_replace(',', '.', (string) $custo) : null;
     }
 
     public function getUnidadeMedidaAttribute()

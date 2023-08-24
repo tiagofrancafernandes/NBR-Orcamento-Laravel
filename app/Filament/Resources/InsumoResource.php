@@ -21,10 +21,6 @@ class InsumoResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('preco')
-                    ->required()
-                    ->maxLength(255),
-
                 Forms\Components\Select::make('unidadeMedida')
                     ->dehydrated(false)
                     ->disabled()
@@ -47,10 +43,9 @@ class InsumoResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('preco'),
-
                 Tables\Columns\TextColumn::make('sinapi.descricao')
                     ->label(__('general.insumos.table.descricao_sinapi'))
+                    ->limit(60)
                     ->searchable(isIndividual: true),
 
                 Tables\Columns\TextColumn::make('unidade_medida')

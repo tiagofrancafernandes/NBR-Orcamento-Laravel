@@ -14,16 +14,19 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @property int $id
  * @property int|null $composicao_ref
  * @property string|null $codigo_sinapi
- * @property string|null $descricao_sinapi
  * @property string|null $codigo_nbr
- * @property string|null $descricao_nbr
  * @property string|null $unidade_medida
  * @property string|null $valor_consolidado
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $descricao_curta
+ * @property string|null $descricao_longa
  * @property-read Composicao|null $composicaoReferencia
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Insumo> $insumos
- * @property-read int|null $insumos_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Composicao> $composicoesFilhas
+ * @property-read int|null $composicoes_filhas_count
+ * @property-read mixed $tem_composicao_ref
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ComposicaoItem> $items
+ * @property-read int|null $items_count
  * @property-read \App\Models\Nbr|null $nbr
  * @property-read \App\Models\Sinapi|null $sinapi
  * @method static \Database\Factories\ComposicaoFactory factory($count = null, $state = [])
@@ -34,22 +37,14 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @method static \Illuminate\Database\Eloquent\Builder|Composicao whereCodigoSinapi($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Composicao whereComposicaoRef($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Composicao whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Composicao whereDescricaoNbr($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Composicao whereDescricaoSinapi($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Composicao whereDescricaoCurta($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Composicao whereDescricaoLonga($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Composicao whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Composicao whereUnidadeMedida($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Composicao whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Composicao whereValorConsolidado($value)
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Insumo> $insumos
- * @property string|null $descricao_curta
- * @property string|null $descricao_longa
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Insumo> $insumos
- * @method static \Illuminate\Database\Eloquent\Builder|Composicao whereDescricaoCurta($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Composicao whereDescricaoLonga($value)
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Insumo> $insumos
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Insumo> $insumos
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Insumo> $insumos
  * @mixin \Eloquent
+ * @mixin IdeHelperComposicao
  */
 class Composicao extends Model
 {
@@ -119,14 +114,15 @@ class Composicao extends Model
      */
     public function insumos(): HasManyThrough
     {
-        return $this->hasManyThrough(
-            Insumo::class,
-            InsumoComposicao::class,
-            'composicao_id',
-            'id',
-            'id',
-            'insumo_id',
-        );
+        // TODO
+        // return $this->hasManyThrough(
+        //     Insumo::class,
+        //     InsumoComposicao::class, // ComposicaoItem
+        //     'composicao_id',
+        //     'id',
+        //     'id',
+        //     'insumo_id',
+        // );
     }
 
     public function getTemComposicaoRefAttribute()

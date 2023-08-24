@@ -154,6 +154,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'invalid_field' => 'O campo :attribute é inválido.',
+        'exists' => 'Já existe um registro com o valor informado.',
+        'exists_plural' => 'Já existem registros com os valores informados.',
     ],
 
     /*

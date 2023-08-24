@@ -23,6 +23,7 @@ class ComposicaoItemFactory extends Factory
             'item_type' => Insumo::class,
             'item_id' => Insumo::factory(),
             'is_a_composicao' => false,
+            'coeficiente' => '0.' . (rand(10, 60)),
         ];
     }
 }

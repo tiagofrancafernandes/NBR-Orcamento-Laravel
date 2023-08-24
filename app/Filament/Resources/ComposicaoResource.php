@@ -28,7 +28,7 @@ class ComposicaoResource extends Resource
                     ->label('Composição referência')
                     ->schema([
                         Forms\Components\Toggle::make('temComposicaoRef')
-                            ->default(true)
+                            ->label(__('general.composicoes.tem_composicao_ref'))
                             // ->mutateDehydratedStateUsing(fn() => true)
                             // ->dehydrated(false)
                             ->reactive(),
@@ -36,6 +36,9 @@ class ComposicaoResource extends Resource
                         Forms\Components\Select::make('composicaoReferencia')
                             ->hidden(fn (callable $get) => !$get('temComposicaoRef'))
                             ->relationship('composicaoReferencia', 'descricao_curta')
+                            ->getOptionLabelFromRecordUsing(
+                                fn (Model $record) => mb_strimwidth(strval($record?->descricao_curta), 0, 50, '...') . ' - #' . $record?->id
+                            )
                             ->columnSpanFull()
                             ->searchable(),
                     ]),
@@ -46,6 +49,9 @@ class ComposicaoResource extends Resource
                             ->required()
                             ->label('general.form.codigo_sinapi')->translateLabel()
                             ->relationship('sinapi', 'descricao')
+                            ->getOptionLabelFromRecordUsing(
+                                fn (Model $record) => mb_strimwidth(strval($record?->descricao), 0, 50, '...') . ' - #' . $record?->id
+                            )
                             ->searchable(),
 
                         Forms\Components\Select::make('codigo_nbr')

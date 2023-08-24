@@ -4,6 +4,9 @@ return [
     'composicoes' => [
         'label_singular' => 'Composição',
         'label_plural' => 'Composições',
+        'edit_single_label' => 'Editar composição',
+        'tem_composicao_ref' => 'Tem composição pai?',
+        'add_item' => 'Cadastrar item',
     ],
 
     'form' => [
@@ -19,6 +22,8 @@ return [
             'descricao_sinapi' => 'Descrição',
         ],
 
+        'create_label_singular' => 'Cadastrar insumo',
+        'create_label_plural' => 'Cadastrar insumos',
         'label_singular' => 'Insumo',
         'label_plural' => 'Insumos',
     ],
