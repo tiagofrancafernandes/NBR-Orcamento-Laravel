@@ -15,7 +15,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property string|null $codigo_nbr
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $preco
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Composicao> $composicoes
  * @property-read int|null $composicoes_count
  * @property-read mixed $custo

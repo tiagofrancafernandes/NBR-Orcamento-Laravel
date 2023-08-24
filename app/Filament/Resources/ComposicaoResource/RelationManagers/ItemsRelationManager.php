@@ -12,6 +12,7 @@ use Filament\Resources\Table;
 use App\Models\ComposicaoItem;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Notifications\Notification;
+use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\ComposicaoResource;
 use Filament\Resources\RelationManagers\RelationManager;
 use App\Filament\Extends\Tables\Columns\TooglableTextInputColumn;
@@ -108,7 +109,7 @@ class ItemsRelationManager extends RelationManager
                             return '';
                         }
 
-                        return money(strval($record?->item?->custo), 'BRL', true)->format();
+                        return money(strval($record?->item?->custo), 'BRL', false);
                     })
                     ->columnSpan(1),
 
@@ -121,13 +122,13 @@ class ItemsRelationManager extends RelationManager
                         'min:0',
                         'max:1',
                     ])
-                    // ->disabled((function (?ComposicaoItem $record) {
-                    //     if ($record->is_a_composicao) {
-                    //         return true;
-                    //     }
+                    ->disabled((function (?ComposicaoItem $record) {
+                        if (!$record || $record?->is_a_composicao) {
+                            return true;
+                        }
 
-                    //     return false;
-                    // }))
+                        return false;
+                    }))
                     ->disableClick(),
 
                 Tables\Columns\TextColumn::make('formated_coeficiente')
@@ -153,7 +154,7 @@ class ItemsRelationManager extends RelationManager
                             return '';
                         }
 
-                        return money($record?->valorCalculado, 'BRL', true)->format();
+                        return money(strval($record?->valorCalculado), 'BRL', false);
                     })
                     ->columnSpan(1),
             ])
@@ -168,11 +169,14 @@ class ItemsRelationManager extends RelationManager
                     ->label(__('general.composicoes.add_item'))
                     // ->inverseRelationshipName('composicao')
                     ->form(function ($livewire) {
+                        $ownerRecord = $livewire?->ownerRecord ?? null;
+                        $ownerRecordId = $ownerRecord?->id ?? null;
                         // dd($record, $action, $livewire?->ownerRecord); //TODO: Remover. Teste ownerRecord
                         // dd($livewire?->ownerRecord?->id); //TODO: Remover. Teste ownerRecord
 
                         return [
                             \Filament\Forms\Components\Radio::make('item_type')
+                                ->label(__('general.composicao_item.item_type_label_singular'))
                                 ->rule('in:' . implode(',', [
                                     Insumo::class,
                                     Composicao::class,
@@ -186,34 +190,88 @@ class ItemsRelationManager extends RelationManager
                                     Insumo::class => 'Insumos',
                                     Composicao::class => 'Composição filha',
                                 ])
+                                ->reactive()
                                 ->default(Insumo::class)
                                 ->required(),
 
                             \Filament\Forms\Components\Select::make('item_id')
-                                ->statePath('item_id.insumo')
+                                ->statePath('item_id')
                                 ->getSearchResultsUsing(
                                     // fn (string $search) => Insumo::where('name', 'like', "%{$search}%")->limit(50)->pluck('name', 'id')
-                                    fn (string $search) => Insumo::join('sinapi', 'codigo_sinapi', 'codigo')
-                                        ->select([
-                                            'insumos.*',
-                                            'sinapi.codigo', 'sinapi.descricao'
-                                        ])
-                                        ->where('descricao', 'like', "%{$search}%")
-                                        ->orWhere('codigo', 'like', "%{$search}%")
-                                        ->limit(30)
-                                        ->pluck(
-                                            'sinapi.descricao',
-                                            'insumos.id',
-                                        )
+                                    function (string $search, callable $get) use ($ownerRecordId) {
+                                        if ($get('item_type') == Composicao::class) {
+                                            // 'descricao_curta'
+                                            // 'descricao_longa'
+                                            // 'codigo_sinapi'
+                                            // 'codigo_nbr'
+
+                                            $query = Composicao::query()
+                                                ->join('sinapi', 'codigo_sinapi', 'sinapi.codigo')
+                                                ->join('nbr', 'codigo_nbr', 'nbr.codigo')
+                                                ->select([
+                                                    'composicoes.*',
+                                                    'sinapi.codigo as sinapi_codigo',
+                                                    'sinapi.descricao as sinapi_descricao',
+                                                    'nbr.codigo as nbr_codigo',
+                                                    'nbr.descricao as nbr_descricao',
+                                                ])
+                                                // ->whereRaw("CONCAT(id, ' ', item_id) != ?", [41 . ' ' . 1])
+                                                // ->whereRaw("CONCAT(id, ' ', item_id) != ?", [41 . ' ' . 1])
+                                                ->when(
+                                                    is_numeric($search) ? $search : null,
+                                                    fn (Builder $query, $date): Builder => $query->where(
+                                                        'id',
+                                                        'like',
+                                                        $date . '%'
+                                                    ),
+                                                )
+                                                // ->whereNull('composicoes.composicao_ref') // Pode pertencenr a quem também é filha???
+                                                ->where(function (Builder $query) use ($search) {
+                                                    return $query->where('composicoes.descricao_curta', 'like', "%{$search}%")
+                                                        ->orWhere('composicoes.descricao_longa', 'like', "%{$search}%")
+                                                        ->orWhere('sinapi.descricao', 'like', "%{$search}%")
+                                                        ->orWhere('sinapi.descricao', 'like', "%{$search}%")
+                                                        ->orWhere('sinapi.codigo', 'like', "%{$search}%")
+                                                        ->orWhere('nbr.descricao', 'like', "%{$search}%")
+                                                        ->orWhere('nbr.codigo', 'like', "%{$search}%");
+                                                });
+
+                                            if ($ownerRecordId) {
+                                                $query->where('composicoes.id', '!=', $ownerRecordId); // Não ser ref de si mesma
+                                            }
+
+                                            return $query
+                                                ->limit(10)
+                                                ->pluck(
+                                                    'composicoes.descricao_curta',
+                                                    'composicoes.id',
+                                                );
+                                        }
+
+                                        return Insumo::join('sinapi', 'codigo_sinapi', 'codigo')
+                                            ->select([
+                                                'insumos.*',
+                                                'sinapi.codigo', 'sinapi.descricao'
+                                            ])
+                                            ->where('descricao', 'like', "%{$search}%")
+                                            ->orWhere('codigo', 'like', "%{$search}%")
+                                            ->limit(30)
+                                            ->pluck(
+                                                'sinapi.descricao',
+                                                'insumos.id',
+                                            );
+                                    }
                                 )
-                                // ->getOptionLabelUsing(fn ($value): ?string => Insumo::find($value)?->name)
-                                // ->relationship('composicao', 'descricao')
-                                ->label(__('general.insumos.label_singular'))
-                                // ->searchable()
+                                ->getOptionLabelUsing(fn ($value): ?string => Insumo::find($value)?->name)
+                                ->label(
+                                    fn (callable $get) => $get('item_type') == Composicao::class
+                                        ? __('general.composicoes.label_singular')
+                                        : __('general.insumos.label_singular')
+                                )
+                                ->searchable()
                                 ->getOptionLabelFromRecordUsing(
                                     fn (Model $record) => mb_strimwidth(strval($record?->descricao), 0, 50, '...') . ' - #' . $record?->id
                                 )
-                                // ->options(\App\Models\User::query()->pluck('name', 'id'))
                                 ->required()
                                 // ->unique(callback: function (
                                 //     \Illuminate\Validation\Rules\Unique $rule,
@@ -258,19 +316,19 @@ class ItemsRelationManager extends RelationManager
                                         ) {
                                             if (!$ownerRecord->id) {
                                                 return $fail(__('validation.custom.invalid_field', [
-                                                    'attribute' => 'composição ID',
+                                                    'attribute' => 'ID da composição',
                                                 ]));
                                             }
 
                                             if (!$get('item_type')) {
                                                 return $fail(__('validation.custom.invalid_field', [
-                                                    'attribute' => 'item type',
+                                                    'attribute' => 'tipo do item',
                                                 ]));
                                             }
 
                                             if (!$value) {
                                                 return $fail(__('validation.custom.invalid_field', [
-                                                    'attribute' => 'item id',
+                                                    'attribute' => 'ID do item',
                                                 ]));
                                             }
 
@@ -299,10 +357,10 @@ class ItemsRelationManager extends RelationManager
 
                         $itemType = $types[$data['item_type']] ?? null;
                         $itemIdKey = str($itemType)->afterLast('\\')->snake()->toString();
-                        $itemId = $data['item_id'][$itemIdKey] ?? null;
+                        $itemId = ($data['item_id'] ?? null) ?: null;
 
                         if (!$itemType || !$itemId) {
-                            return null; // TODO: entender isso depois
+                            return []; // TODO: talvez seja ideal notificar erro aqui (?? ou retornar o $data como está?)
                         }
 
                         $data['is_a_composicao'] = $itemIdKey === 'composicao';

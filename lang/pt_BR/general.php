@@ -9,6 +9,12 @@ return [
         'add_item' => 'Cadastrar item',
     ],
 
+    'composicao_item' => [
+        'item_type_label_singular' => 'Tipo de item',
+        'item_type_label_plural' => 'Tipos de itens',
+        'edit_item_type_single_label' => 'Alterar tipo de item',
+    ],
+
     'form' => [
         'codigo_sinapi' => 'Código SINAPI',
         'sinapi' => 'SINAPI',
