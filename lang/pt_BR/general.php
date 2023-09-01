@@ -4,7 +4,7 @@ return [
     'composicoes' => [
         'label_singular' => 'Composição',
         'label_plural' => 'Composições',
-        'edit_single_label' => 'Editar composição',
+        'edit_single_label' => 'Ver',
         'tem_composicao_ref' => 'Tem composição pai?',
         'add_item' => 'Cadastrar item',
     ],

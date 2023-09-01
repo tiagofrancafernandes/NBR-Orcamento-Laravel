@@ -109,7 +109,9 @@ class ItemsRelationManager extends RelationManager
                             return '';
                         }
 
-                        return money(strval($record?->item?->custo), 'BRL', false);
+                        $amount = $record?->item?->custo ?? null;
+
+                        return money($amount, 'BRL', is_float($amount));
                     })
                     ->columnSpan(1),
 
@@ -154,7 +156,9 @@ class ItemsRelationManager extends RelationManager
                             return '';
                         }
 
-                        return money(strval($record?->valorCalculado), 'BRL', false);
+                        $amount = $record?->valorCalculado;
+
+                        return money($amount, 'BRL', is_float($amount));
                     })
                     ->columnSpan(1),
             ])
